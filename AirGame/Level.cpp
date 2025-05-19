@@ -10,7 +10,7 @@ Level::Level(int levelNumber)
 {
 	string line;
 
-	std::ifstream in("levels/" + to_string(levelNumber) + ".txt");
+	std::ifstream in("/Users/krllggnv/Documents/GitHub/airport/AirGame/levels/" + to_string(levelNumber) + ".txt");
 	if (in.is_open())
 	{
 		//Taking off Aripalnes pasring

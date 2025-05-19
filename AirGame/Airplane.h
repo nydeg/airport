@@ -8,12 +8,25 @@
 using std::cout;
 using std::string;
 
+class Level;
+class Dispatcher;
+
 class Airplane {
 public:
 
+	// virtual void work(Level *level, Dispatcher *dispatcher);
+
+	// functions for work
+	void MovingToRequest(int x, int y);
+	void MovingNewLap(int x, int y);
+	void BoardingStartPoint(int startX, int startY);
+	void BoardingEndPoint(int endX, int endY);
+
+	void DeleteAirplane(Level *level);
+
 	Airplane() { cout << "airplane was created\n"; }
 
-	~Airplane(){cout << "airplane was deleted\n";}
+	~Airplane() {cout << "airplane was deleted\n";}
 
 	//access
 	Date getTimeOfAction() { return timeOfAction; }
@@ -27,6 +40,8 @@ public:
 	int getMaxLaps() { return maxLaps; }
 	int getlengthOfAirstrip() { return lengthOfAirstrip; }
 	int getOneLipInMinute() { return oneLipInMinute; }
+	int getX() { return this->x; }
+	int getY() { return this->y; }
 
 	//setters
 	void setTimeOfAction(Date date) { timeOfAction = date; }
@@ -40,6 +55,9 @@ public:
 
 private:
 	int deviation; // in minutes
+
+	int x;
+	int y;
 
 	string status;
 	Date timeOfAction;
