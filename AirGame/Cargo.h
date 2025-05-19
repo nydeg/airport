@@ -4,9 +4,14 @@
 
 #include "Airplane.h"
 
+#define TIME_FOR_ONE_LIP 40
+#define LENGTH_OF_REQUIRED_AIRSTRIP 40
+
 class Cargo : public Airplane {
 public:
 	Cargo() { cout << "Cargo was created\n"; }
+
+	Cargo(int boardNumber, string stata, Date date, int maxLaps);
 
 	~Cargo() { cout << "Cargo was deleted\n"; }
 private:

@@ -1,8 +1,6 @@
-#include "Military.h"
+#include "Cargo.h"
 
-
-
-Military::Military(int boardNumber, string stata, Date date, int maxLaps)
+Cargo::Cargo(int boardNumber, string stata, Date date, int maxLaps)
 {
 	//unique data
 	setBoardNumber(boardNumber);
@@ -20,6 +18,6 @@ Military::Military(int boardNumber, string stata, Date date, int maxLaps)
 	//for every military
 	setLengthOfAirstrip(LENGTH_OF_REQUIRED_AIRSTRIP);
 	setOneLipInMinute(TIME_FOR_ONE_LIP);
-	
-	cout << "Military was created with parameters\n";
+
+	cout << "Cargo was created with parameters\n";
 }

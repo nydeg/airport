@@ -11,7 +11,7 @@ using std::string;
 class Airplane {
 public:
 
-	Airplane() { cout << "airplane was created\n"; }
+	Airplane();
 
 	~Airplane(){cout << "airplane was deleted\n";}
 
