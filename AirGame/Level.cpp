@@ -5,6 +5,8 @@
 #include "Cilivian.h"
 #include "Cargo.h"
 #include "Military.h"
+#include "Date.h"
+
 
 Level::Level(int levelNumber)
 {

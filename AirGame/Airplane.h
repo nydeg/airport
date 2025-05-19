@@ -10,17 +10,19 @@ using std::string;
 
 class Level;
 class Dispatcher;
+class Airstrip;
 
 class Airplane {
 public:
 
-	// virtual void work(Level *level, Dispatcher *dispatcher);
+	virtual void work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, int x, int y) = 0;
 
 	// functions for work
 	void MovingToRequest(int x, int y);
 	void MovingNewLap(int x, int y);
 	void BoardingStartPoint(int startX, int startY);
 	void BoardingEndPoint(int endX, int endY);
+	void TakeOff(Level *level);
 
 	void DeleteAirplane(Level *level);
 

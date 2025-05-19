@@ -1,9 +1,7 @@
-#include "Cargo.h"
-#include "Level.h"
-#include "Dispatcher.h"
+#include "Cilivian.h"
 #include "Airstrip.h"
 
-void Cargo::work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, int x, int y) {
+void Civilian::work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, int x, int y) {
     if (this->getStatus() == "moving_to_request") {
         this->MovingToRequest(x, y);
     }

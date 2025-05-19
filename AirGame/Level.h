@@ -3,10 +3,12 @@
 #define LEVEL_H
 
 #include <iostream>
-#include "Airplane.h"
-#include "Airstrip.h"
 #include <vector>
+
 using namespace std;
+
+class Airplane;
+class Airstrip;
 
 class Level {
 public:

@@ -48,8 +48,11 @@ void Airplane::BoardingEndPoint(Level *level, Dispatcher *dispatcher, int endX, 
         this->DeleteAirplane(level);
         // increase user score
         dispatcher->setCurrentScore(dispatcher->getCurrentScore() + 1);
-        // if (dispatcher->getCurrentScore() > dispatcher->getBestScore()) {
-        //     dispatcher->setBestScore(dispatcher->getCurrentScore());
-        // }
     }
 }
+
+void Airplane::TakeOff(Level *level) {
+    this->setStatus("take_off");
+    this->DeleteAirplane(level);
+}
+
