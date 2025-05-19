@@ -6,7 +6,9 @@
 
 class Civilian : public Airplane {
 public:
+	Civilian() { cout << "Civilian was created\n"; }
 
+	~Civilian() { cout << "Civilian was deleted\n"; }
 private:
 
 };

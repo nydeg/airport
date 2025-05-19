@@ -6,7 +6,9 @@
 
 class Cargo : public Airplane {
 public:
+	Cargo() { cout << "Cargo was created\n"; }
 
+	~Cargo() { cout << "Cargo was deleted\n"; }
 private:
 };
 
