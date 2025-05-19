@@ -1,8 +1,10 @@
 #pragma once
 
 #include <iostream>
-#include <SFML/Graphics.hpp>
 #include <string>
+#include <sstream>
+#include <fstream>
+#include <SFML/Graphics.hpp>
 
 class Game;
 

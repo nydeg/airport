@@ -26,7 +26,7 @@ int main() {
         window.display();
     }
 
-    // Здесь можно добавить логику для нового окна
+    // MAIN GAME
     sf::RenderWindow newWindow(sf::VideoMode(800, 600), "Game Window");
     game.setWindow(&newWindow);
     while (game.getWindow()->isOpen()) {
@@ -36,7 +36,6 @@ int main() {
                 game.getWindow()->close();
         }
         game.getWindow()->clear();
-        // Добавьте содержимое нового окна здесь
         game.getWindow()->display();
     }
 

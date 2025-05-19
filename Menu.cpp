@@ -60,9 +60,37 @@ void Menu::event_handler(sf::RenderWindow* window, sf::Event* event, Game* game)
         sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
         if (button.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
             if (!playerName.empty()) {
-                // =====
                 // Проверка: введёное имя существует или нет, создание/подгрузка файлов
-                // =====
+                string line;
+                string name;
+                int last_level;
+                int best_score;
+                int loses;
+
+                ifstream in("Users.txt");
+                if (in.is_open()) {    
+                    while (getline(in, line)) {
+                        int first_space = line.find(' ');
+                        name = line.substr(0, first_space);
+                        if (playerName == name) {
+                            istringstream iss(line.substr(first_space + 1));
+
+                            iss >> last_level >> best_score >> loses;
+                            cout << name << last_level << best_score << loses << endl;
+                            break;
+                        }
+                        in.close();
+                    }
+                }
+
+                if (name != playerName) {
+                    ofstream out("Users.txt", ios::app);
+                    if (out.is_open()) {
+                        out << playerName << " " << 1 << " " << 0 << " " << 0 << endl;
+                    }
+                    out.close();
+                }
+
                 window->close();
             }
         }
