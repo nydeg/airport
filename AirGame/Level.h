@@ -13,6 +13,8 @@ public:
 
 	Level(int levelNumber);
 
+	void scheduleSort();
+
 	//access
 	int getFine() { return fine; }
 	vector<Airstrip*> getAirstrips() { return airstrips; }
@@ -26,6 +28,8 @@ private:
 	vector<Airplane*> airplanes;
 	int score;
 	int countOfAirplanes;
+
+
 
 	//startSchedule
 };

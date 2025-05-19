@@ -1,6 +1,7 @@
 #include "Level.h"
 #include <fstream>
 #include <string>
+#include <algorithm>
 
 #include "Cilivian.h"
 #include "Cargo.h"
@@ -133,3 +134,17 @@ Level::Level(int levelNumber)
 	}
 	in.close();
 }
+
+
+bool CompareByDate(Airplane* ft, Airplane* sd)
+{
+	if (ft->getTimeOfAction() > sd->getTimeOfAction())
+		return false;
+	return true;
+}
+
+void Level::scheduleSort()
+{
+	sort(airplanes.begin(), airplanes.end(), CompareByDate);
+}
+
