@@ -21,7 +21,7 @@ public:
 	void MovingToRequest(int x, int y);
 	void MovingNewLap(int x, int y);
 	void BoardingStartPoint(int startX, int startY);
-	void BoardingEndPoint(int endX, int endY);
+	void BoardingEndPoint(Level *level, Dispatcher *dispatcher, int endX, int endY);
 	void TakeOff(Level *level);
 
 	void DeleteAirplane(Level *level);

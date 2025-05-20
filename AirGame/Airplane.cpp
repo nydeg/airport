@@ -4,7 +4,14 @@
 #include "Level.h"
 
 void Airplane::DeleteAirplane(Level *level) {
-    int airplaneIndex = find(level->getAirplanes().begin(), level->getAirplanes().end(), this);
+    // int airplaneIndex = find(level->getAirplanes().begin(), level->getAirplanes().end(), this);
+    int airplaneIndex = 0;
+    for (int i = 0; i < level->getAirplanes().size(); i++) {
+        if (level->getAirplanes()[i] == this) {
+            airplaneIndex = i;
+            break;
+        }
+    }
     level->getAirplanes().erase(level->getAirplanes().begin() + airplaneIndex);
     delete this;
 }

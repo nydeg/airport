@@ -34,7 +34,7 @@ void Military::work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, in
         this->BoardingStartPoint(airstrip->getStart().first, airstrip->getStart().second);
     }
     else if (this->getStatus() == "boarding_endPoint") {
-        this->BoardingEndPoint(airstrip->getEnd().first, airstrip->getEnd().second);
+        this->BoardingEndPoint(level, dispatcher, airstrip->getEnd().first, airstrip->getEnd().second);
     }
     else if (this->getStatus() == "take_off") {
         this->TakeOff(level);
