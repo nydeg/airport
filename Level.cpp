@@ -135,6 +135,8 @@ Level::Level(int levelNumber)
 	in.close();
 }
 
+Level::Level() {};
+
 
 bool CompareByDate(Airplane* ft, Airplane* sd)
 {

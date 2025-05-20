@@ -1,5 +1,7 @@
-﻿#include <SFML/Graphics.hpp>
-#include <iostream>
+﻿#include <iostream>
+#include "Date.h"
+#include "Level.h"
+#include <SFML/Graphics.hpp>
 #include "Menu.h"
 #include "Game.h"
 
@@ -9,7 +11,7 @@ int main() {
     Game game;
     Menu menu_game("./assets/ofont.ru_Menlo.ttf", "./assets/airoport final.png");
     menu_game.renderInterface();
-    
+
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -26,6 +28,8 @@ int main() {
         window.display();
     }
 
+    //delete menu_game;
+
     // MAIN GAME
     sf::RenderWindow newWindow(sf::VideoMode(800, 600), "Game Window");
     game.setWindow(&newWindow);
@@ -41,3 +45,16 @@ int main() {
 
     return 0;
 }
+
+
+    /*
+    Date currDate;
+    Date cD;
+
+    currDate = currDate + 30;
+    currDate.printDate();
+
+    int raz = currDate - cD;
+    cout << "\nThis is ZADERJKA IN MINUTES --> " << raz << "\n";
+    */
+//    std::cout << "Hello World!\n";

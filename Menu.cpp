@@ -1,5 +1,20 @@
 #include "Menu.h"
 #include "Game.h"
+#include "Level.h"
+
+Menu::~Menu()
+{
+    delete &font;
+    delete &playerName;
+    delete &bg_texture;
+    delete &background;
+    delete &inputText;
+    delete &button;
+    delete &title;
+    delete &inputBox;
+    delete &buttonText;
+    cout << "tripi tropa" << endl;
+}
 
 void Menu::renderInterface(){
     // Текст над полем ввода
@@ -63,9 +78,9 @@ void Menu::event_handler(sf::RenderWindow* window, sf::Event* event, Game* game)
                 // Проверка: введёное имя существует или нет, создание/подгрузка файлов
                 string line;
                 string name;
-                int last_level;
-                int best_score;
-                int loses;
+                int last_level = 1;
+                int best_score = 0;
+                int loses = 0;
 
                 ifstream in("Users.txt");
                 if (in.is_open()) {    
@@ -79,7 +94,6 @@ void Menu::event_handler(sf::RenderWindow* window, sf::Event* event, Game* game)
                             cout << name << last_level << best_score << loses << endl;
                             break;
                         }
-                        in.close();
                     }
                 }
 
@@ -88,9 +102,21 @@ void Menu::event_handler(sf::RenderWindow* window, sf::Event* event, Game* game)
                     if (out.is_open()) {
                         out << playerName << " " << 1 << " " << 0 << " " << 0 << endl;
                     }
-                    out.close();
                 }
+                in.close();
 
+                //Level level_1(last_level); // 1
+                Level* level = new Level(last_level);
+                level->scheduleSort();
+
+                cout << "\n\n";
+                for (int i = 0; i < level->getAirplanes().size(); ++i) {
+                    cout << "board number " << level->getAirplanes()[i]->getBoardNumber() << " will start at \n\t";
+                    level->getAirplanes()[i]->getTimeOfAction().printDate();
+                    cout << "\n";
+                }
+                
+                game->setLevel(level);
                 window->close();
             }
         }

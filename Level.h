@@ -12,6 +12,7 @@ class Level {
 public:
 
 	Level(int levelNumber);
+	Level();
 
 	void scheduleSort();
 
