@@ -245,7 +245,7 @@ bool Date::operator>(const Date& right) const
 						return true;
 					}
 					else
-						return false; // даты равны
+						return false; // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 				}
 			}
 		}
@@ -284,8 +284,7 @@ int transform(char x) {
 
 Date::Date(string sdate) :Date()
 {
-
-	//проверка на валидность строки.
+	
 	if (sdate.length() != 16) {
 		cout << "Date is false\n";
 		return;
@@ -299,7 +298,6 @@ Date::Date(string sdate) :Date()
 			if (!(48 <= (int)sdate[i] && (int)sdate[i] <= 57))
 				return;
 	}
-	//парсим данные
 	int d = 10 * transform(sdate[0]) + transform(sdate[1]);
 	int m = 10 * transform(sdate[3]) + transform(sdate[4]);
 	int y = 1000 * transform(sdate[6]) + 100 * transform(sdate[7]) + 10 * transform(sdate[8]) + transform(sdate[9]);

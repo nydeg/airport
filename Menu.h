@@ -18,7 +18,6 @@ public:
 		bg_texture.loadFromFile(bg_url);
 		background.setTexture(bg_texture);
 	}
-    ~Menu();
 
     sf::Text getinputText() { return inputText; }
     sf::Text getTitle() { return title; }

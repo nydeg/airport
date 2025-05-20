@@ -36,11 +36,10 @@ public:
 	int getHour() { return hour; }
 	int getMinute() { return minute; }
 
-	//перегрузка
 	Date operator+ (int right) const; // add the ceil num of MINUTES
 	//Date operator- (int right) const; // 
 
-	int operator- (const Date& right) const; // Разница в МИНУТАХ
+	int operator- (const Date& right) const;
 
 	Date& operator++();
 	Date& operator++(int);

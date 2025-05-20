@@ -2,22 +2,9 @@
 #include "Game.h"
 #include "Level.h"
 
-Menu::~Menu()
-{
-    delete &font;
-    delete &playerName;
-    delete &bg_texture;
-    delete &background;
-    delete &inputText;
-    delete &button;
-    delete &title;
-    delete &inputBox;
-    delete &buttonText;
-    cout << "tripi tropa" << endl;
-}
 
 void Menu::renderInterface(){
-    // Текст над полем ввода
+    // ????? ??? ????? ?????
     //sf::Text title("ENTER YOUR NAME", font, 40);
     title.setString("ENTER YOUR NAME");
     title.setFont(font);
@@ -25,7 +12,7 @@ void Menu::renderInterface(){
     title.setFillColor(sf::Color::White);
     title.setPosition(250, 200);
 
-    // Поле ввода
+    // ???? ?????
     //sf::RectangleShape inputBox(sf::Vector2f(400, 50));
     inputBox.setSize(sf::Vector2f(400, 50));
     inputBox.setFillColor(sf::Color::Black);
@@ -33,21 +20,21 @@ void Menu::renderInterface(){
     inputBox.setOutlineColor(sf::Color::White);
     inputBox.setPosition(200, 300);
 
-    // Текст, который вводит пользователь
+    // ?????, ??????? ?????? ????????????
     inputText.setString("");
     inputText.setFont(font);
     inputText.setCharacterSize(30);
     inputText.setFillColor(sf::Color::White);
     inputText.setPosition(210, 305);
 
-    // Кнопка ввода имени
+    // ?????? ????? ?????
     //sf::RectangleShape button(sf::Vector2f(150, 50)); => Sprite
     button.setSize(sf::Vector2f(150, 50));
     button.setFillColor(sf::Color::Green);
     button.setPosition(325, 400);
     //button.setTexture();
 
-    // Текст кнопки - потом убрать и добавить текстуру
+    // ????? ?????? - ????? ?????? ? ???????? ????????
     //sf::Text buttonText("ENTER", font, 30);
     buttonText.setString("ENTER");
     buttonText.setFont(font);
@@ -59,7 +46,7 @@ void Menu::renderInterface(){
 void Menu::event_handler(sf::RenderWindow* window, sf::Event* event, Game* game){
     if (event->type == sf::Event::Closed) window->close();
 
-    // Обработка ввода текста
+    // ????????? ????? ??????
     if (event->type == sf::Event::TextEntered) {
         if (event->text.unicode == '\b' && !playerName.empty()) {
             playerName.pop_back();
@@ -70,12 +57,12 @@ void Menu::event_handler(sf::RenderWindow* window, sf::Event* event, Game* game)
         inputText.setString(playerName);
     }
 
-    // Обработка клика на кнопку
+    // ????????? ????? ?? ??????
     if (event->type == sf::Event::MouseButtonReleased) {
         sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
         if (button.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
             if (!playerName.empty()) {
-                // Проверка: введёное имя существует или нет, создание/подгрузка файлов
+                // ????????: ??????? ??? ?????????? ??? ???, ????????/????????? ??????
                 string line;
                 string name;
                 int last_level = 1;

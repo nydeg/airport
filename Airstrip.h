@@ -22,6 +22,7 @@ private:
 	pair<int, int> start;
 	pair<int, int> end;
 	int length; // compute from start and end
+	string status;
 };
 
 #endif AIRSTRIP_H
