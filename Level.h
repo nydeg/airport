@@ -30,6 +30,10 @@ public:
 	int getScore() { return score; }
 	int getCountOfAirplanes() { return countOfAirplanes; }
 	vector<LapCoordinate> getLapCoordinates() { return this->lapCoordinates; }
+	pair<int, int> getHangarForTakeoffCoordinates() { return this->hangarForTakeoffCoordinates; }
+	pair<int, int> getHangarForBoardingCoordinates() { return this->hangarForBoardingCoordinates; }
+	pair<int, int> getRoadHangarForTakeoffCoordinates() { return this->roadHangarForTakeoffCoordinates; }
+	pair<int, int> getRoadHangarForBoardingCoordinates() { return this->roadHangarForBoardingCoordinates; }
 
 private:
 	int fine;
@@ -39,6 +43,11 @@ private:
 	int countOfAirplanes;
 
 	vector<LapCoordinate> lapCoordinates;
+
+	pair<int, int> hangarForTakeoffCoordinates;
+	pair<int, int> roadHangarForTakeoffCoordinates;
+	pair<int, int> hangarForBoardingCoordinates;
+	pair<int, int> roadHangarForBoardingCoordinates;
 
 	//startSchedule
 };

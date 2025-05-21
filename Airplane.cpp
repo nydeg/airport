@@ -84,6 +84,25 @@ void Airplane::MoveToTakeoff(Level *level, int airstripNumber) {
     // draw a path here
 }
 
+void Airplane::MoveFromHangarToAirstrip(Level *level, int airstripNumber) {
+    vector<pair<int, int> > path;
+    Airstrip *curAirstrip = level->getAirstrips()[airstripNumber];
+    path.push_back(level->getRoadHangarForTakeoffCoordinates());
+    path.push_back(curAirstrip->getStartInRoad());
+    path.push_back(curAirstrip->getStart());
+    // draw a path here
+}
+
+void Airplane::MoveFromAirstripToHangar(Level *level, int airstripNumber) {
+    vector<pair<int, int> > path;
+    Airstrip *curAirstrip = level->getAirstrips()[airstripNumber];
+    path.push_back(curAirstrip->getStartInRoad());
+    path.push_back(level->getRoadHangarForBoardingCoordinates());
+    path.push_back(level->getHangarForBoardingCoordinates());
+    // draw a path here
+}
+
+
 
 void Airplane::DeleteAirplane(Level *level) {
     // int airplaneIndex = find(level->getAirplanes().begin(), level->getAirplanes().end(), this);

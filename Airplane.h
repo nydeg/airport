@@ -30,6 +30,8 @@ public:
 	void MoveInLap(Level *level);
 	void MoveToAirstrip(Level *level, int airstripNumber);
 	void MoveToTakeoff(Level *level, int airstripNumber);
+	void MoveFromHangarToAirstrip(Level *level, int airstripNumber);
+	void MoveFromAirstripToHangar(Level *level, int airstripNumber);
 	LapCoordinate findNearestPoint(int x0, int y0, vector<LapCoordinate> points);
 
 	Airplane() { cout << "airplane was created\n"; }
