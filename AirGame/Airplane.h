@@ -2,8 +2,10 @@
 #ifndef AIRPLANE_H
 #define AIRPLANE_H
 
-#include "iostream"
+#include <iostream>
+#include <vector>
 #include "Date.h"
+#include "Level.h"
 
 using std::cout;
 using std::string;
@@ -25,6 +27,10 @@ public:
 	void TakeOff(Level *level);
 
 	void DeleteAirplane(Level *level);
+	void MoveInLap(Level *level);
+	void MoveToAirstrip(Level *level, int airstripNumber);
+	void MoveToTakeoff(Level *level, int airstripNumber);
+	LapCoordinate findNearestPoint(int x0, int y0, vector<LapCoordinate> points);
 
 	Airplane() { cout << "airplane was created\n"; }
 
