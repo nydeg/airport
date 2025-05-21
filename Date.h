@@ -5,7 +5,6 @@
 #include <iostream>
 using std::cout;
 using std::string;
-
 class Date {
 
 public:
@@ -14,6 +13,20 @@ public:
 	Date(int d, int m, int y, int h, int min);
 
 	Date(string sdate);
+
+	string getStringDate() {
+		if(hour < 10 && minute < 10)
+			return std::to_string(year) + "." + std::to_string(month) + "." + std::to_string(day) + " 0" + std::to_string(hour) + ":0" + std::to_string(minute);
+		if(hour < 10)
+			return std::to_string(year) + "." + std::to_string(month) + "." + std::to_string(day) + " 0" + std::to_string(hour) + ":" + std::to_string(minute);
+		if(minute < 10)
+			return std::to_string(year) + "." + std::to_string(month) + "." + std::to_string(day) + " " + std::to_string(hour) + ":0" + std::to_string(minute);
+
+		return std::to_string(year) + "." + std::to_string(month) + "." + std::to_string(day) + " " + std::to_string(hour) + ":" + std::to_string(minute);
+
+
+	}
+
 
 	void printDate() const;
 

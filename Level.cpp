@@ -28,12 +28,12 @@ Level::Level(int levelNumber)
 			string addingLapsCount = "";
 
 			//parsing information
-			for (int i = 2; i < 5; ++i) {
-				bNum += line[i];
+			for (int j = 2; j < 5; ++j) {
+				bNum += line[j];
 			}
 			stata = line[6];
-			for (int i = 8; i < 24; ++i) {
-				sDate += line[i];
+			for (int k = 8; k < 24; ++k) {
+				sDate += line[k];
 			}
 			addingLapsCount = line[25];
 
@@ -123,14 +123,8 @@ Level::Level(int levelNumber)
 			airstrips.push_back(airstripTMP);
 			cout << "\n\t" << i + AirplanesCount << "\n";
 		}
-		
 
 
-		/*
-		while (std::getline(in, line)) {
-			std::cout << line << std::endl;
-		}
-		*/
 	}
 	in.close();
 }

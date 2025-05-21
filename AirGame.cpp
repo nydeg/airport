@@ -31,8 +31,13 @@ int main() {
     //delete menu_game;
 
     // MAIN GAME
-    sf::RenderWindow newWindow(sf::VideoMode(800, 600), "Game Window");
+    sf::RenderWindow newWindow(sf::VideoMode(1700, 900), "Game Window");
+    game.setBackground("./assets/syeah final.png");
     game.setWindow(&newWindow);
+
+
+    game.renderDisplay("./assets/ofont.ru_Menlo.ttf");
+
     while (game.getWindow()->isOpen()) {
         sf::Event event;
         while (game.getWindow()->pollEvent(event)) {
@@ -40,6 +45,14 @@ int main() {
                 game.getWindow()->close();
         }
         game.getWindow()->clear();
+        game.updateDisplay();
+        game.getWindow()->draw(game.getBackground());
+        //
+        game.getWindow()->draw(game.__s_getCurrTimeShape__());
+        game.getWindow()->draw(game.__t_getCurrTime__());
+
+        //
+
         game.getWindow()->display();
     }
 

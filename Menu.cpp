@@ -4,7 +4,7 @@
 
 
 void Menu::renderInterface(){
-    // ????? ??? ????? ?????
+
     //sf::Text title("ENTER YOUR NAME", font, 40);
     title.setString("ENTER YOUR NAME");
     title.setFont(font);
@@ -12,7 +12,6 @@ void Menu::renderInterface(){
     title.setFillColor(sf::Color::White);
     title.setPosition(250, 200);
 
-    // ???? ?????
     //sf::RectangleShape inputBox(sf::Vector2f(400, 50));
     inputBox.setSize(sf::Vector2f(400, 50));
     inputBox.setFillColor(sf::Color::Black);
@@ -20,23 +19,20 @@ void Menu::renderInterface(){
     inputBox.setOutlineColor(sf::Color::White);
     inputBox.setPosition(200, 300);
 
-    // ?????, ??????? ?????? ????????????
     inputText.setString("");
     inputText.setFont(font);
     inputText.setCharacterSize(30);
     inputText.setFillColor(sf::Color::White);
     inputText.setPosition(210, 305);
 
-    // ?????? ????? ?????
     //sf::RectangleShape button(sf::Vector2f(150, 50)); => Sprite
     button.setSize(sf::Vector2f(150, 50));
     button.setFillColor(sf::Color::Green);
     button.setPosition(325, 400);
     //button.setTexture();
 
-    // ????? ?????? - ????? ?????? ? ???????? ????????
     //sf::Text buttonText("ENTER", font, 30);
-    buttonText.setString("ENTER");
+    buttonText.setString(" START");
     buttonText.setFont(font);
     buttonText.setCharacterSize(30);
     buttonText.setFillColor(sf::Color::White);
@@ -46,7 +42,6 @@ void Menu::renderInterface(){
 void Menu::event_handler(sf::RenderWindow* window, sf::Event* event, Game* game){
     if (event->type == sf::Event::Closed) window->close();
 
-    // ????????? ????? ??????
     if (event->type == sf::Event::TextEntered) {
         if (event->text.unicode == '\b' && !playerName.empty()) {
             playerName.pop_back();
@@ -57,12 +52,11 @@ void Menu::event_handler(sf::RenderWindow* window, sf::Event* event, Game* game)
         inputText.setString(playerName);
     }
 
-    // ????????? ????? ?? ??????
     if (event->type == sf::Event::MouseButtonReleased) {
         sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
         if (button.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
             if (!playerName.empty()) {
-                // ????????: ??????? ??? ?????????? ??? ???, ????????/????????? ??????
+
                 string line;
                 string name;
                 int last_level = 1;

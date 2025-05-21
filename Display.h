@@ -1,6 +1,7 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 
+#include <SFML/Graphics.hpp>
 #include "Airplane.h"
 #include "Airstrip.h"
 #include "Date.h"
@@ -8,12 +9,15 @@
 
 using namespace std;
 
+
 class Display {
 public:
 
     Display();
+    Display(vector<Airplane*>* flights, vector<Airstrip*>* Airstrips);
     Display(Date curr, int fine, int score, vector<Airplane*>* flights, vector<Airstrip*>* Airstrips);
 
+    void showingInfo(); // the info which will be showed on display.
 
 
     //setters
@@ -23,14 +27,18 @@ public:
     void setSchedule(vector<Airplane*>* tmp){ schedule = tmp;}
     void setAirstrips(vector<Airstrip*>* tmp){strips = tmp;}
 
+
     //access
-    Date getCurrTime(){return currTime;}
+    Date d_getCurrTime(){return currTime;}
     int getCurrFine(){return currFine;}
     int getCurrScore(){return currScore;}
     vector<Airplane*>* getSchedule(){return schedule;}
     vector<Airstrip*>* getAirstrips(){return strips;}
 
+
 private:
+
+
     Date currTime;
     int currFine;
     int currScore;

@@ -31,7 +31,8 @@ add_executable(airport AirGame.cpp
         Military.h
         AirGame.cpp
         Display.h
-        Display.cpp)
+        Display.cpp
+)
 
 
 target_link_libraries(airport sfml-graphics)

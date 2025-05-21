@@ -18,8 +18,8 @@ public:
 
 	//access
 	int getFine() { return fine; }
-	vector<Airstrip*> getAirstrips() { return airstrips; }
-	vector<Airplane*> getAirplanes() { return airplanes; }
+	vector<Airstrip*>& getAirstrips() { return airstrips; }
+	vector<Airplane*>& getAirplanes() { return airplanes; }
 	int getScore() { return score; }
 	int getCountOfAirplanes() { return countOfAirplanes; }
 
