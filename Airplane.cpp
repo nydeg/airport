@@ -71,7 +71,7 @@ void Airplane::MoveToAirstrip(Level *level, int airstripNumber) {
     }
     path.push_back(curAirstrip->getEndInSky());
     path.push_back(curAirstrip->getEnd());
-    path.push_back(curAirstrip.getStart());
+    path.push_back(curAirstrip->getStart());
     // draw a path here
 }
 
