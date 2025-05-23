@@ -6,7 +6,17 @@
 #include "Airplane.h"
 #include "Airstrip.h"
 #include <vector>
+
 using namespace std;
+
+class Airplane;
+class Airstrip;
+
+struct LapCoordinate {
+	int x;
+	int y;
+	string position; // upper right/left corner, lower right/left corner
+};
 
 class Level {
 public:
@@ -14,6 +24,7 @@ public:
 	Level(int levelNumber);
 	Level();
 
+	void initLapCoordinates();
 	void scheduleSort();
 
 	//access
@@ -22,6 +33,11 @@ public:
 	vector<Airplane*>& getAirplanes() { return airplanes; }
 	int getScore() { return score; }
 	int getCountOfAirplanes() { return countOfAirplanes; }
+	vector<LapCoordinate> getLapCoordinates() { return this->lapCoordinates; }
+	pair<int, int> getHangarForTakeoffCoordinates() { return this->hangarForTakeoffCoordinates; }
+	pair<int, int> getHangarForBoardingCoordinates() { return this->hangarForBoardingCoordinates; }
+	pair<int, int> getRoadHangarForTakeoffCoordinates() { return this->roadHangarForTakeoffCoordinates; }
+	pair<int, int> getRoadHangarForBoardingCoordinates() { return this->roadHangarForBoardingCoordinates; }
 
 private:
 	int fine;
@@ -30,7 +46,12 @@ private:
 	int score;
 	int countOfAirplanes;
 
+	vector<LapCoordinate> lapCoordinates;
 
+	pair<int, int> hangarForTakeoffCoordinates;
+	pair<int, int> roadHangarForTakeoffCoordinates;
+	pair<int, int> hangarForBoardingCoordinates;
+	pair<int, int> roadHangarForBoardingCoordinates;
 
 	//startSchedule
 };

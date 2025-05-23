@@ -6,8 +6,15 @@
 #include "Cilivian.h"
 #include "Cargo.h"
 #include "Military.h"
+#include "Date.h"
 
 #include "Airstrip.h"
+void Level::initLapCoordinates() {
+    this->lapCoordinates.push_back({10, 10, "upper-right"});
+    this->lapCoordinates.push_back({0, 10, "upper-left"});
+    this->lapCoordinates.push_back({0, 0, "lower-left"});
+    this->lapCoordinates.push_back({10, 0, "lower-right"});
+}
 
 Level::Level(int levelNumber)
 {
@@ -17,7 +24,7 @@ Level::Level(int levelNumber)
 	if (in.is_open())
 	{
 		//Airplanes parsing
-		getline(in, line);	
+		getline(in, line);
 		int AirplanesCount = stoi(line);
 		countOfAirplanes = AirplanesCount;
 		for (int i = 0; i < AirplanesCount; ++i) {
