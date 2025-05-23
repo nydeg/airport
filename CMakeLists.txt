@@ -32,6 +32,7 @@ add_executable(airport AirGame.cpp
         AirGame.cpp
         Display.h
         Display.cpp
+        Airplane.h
 )
 
 
