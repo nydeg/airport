@@ -79,6 +79,11 @@ void Game::renderDisplay(string fontPath) {
         _t_timeTable_.push_back(newText);
     }
 
+    //create airplane info
+    _s_airplaneInfo_.setSize(sf::Vector2f(300, 350));
+    _s_airplaneInfo_.setFillColor(sf::Color::White);
+    _s_airplaneInfo_.setPosition(START_SHAPES_X, START_SHAPES_Y + 550);
+
     //create buttons
     _s_approveButton.setSize(sf::Vector2f(150, 150));
     _s_approveButton.setFillColor(sf::Color::Green);
@@ -87,6 +92,7 @@ void Game::renderDisplay(string fontPath) {
     _s_dismissButton.setSize(sf::Vector2f(150, 150));
     _s_dismissButton.setFillColor(sf::Color::Red);
     _s_dismissButton.setPosition(START_SHAPES_X + 150 , 850);
+
 
 }
 
@@ -144,4 +150,35 @@ void Game::updateDisplay() {
 
     //this->updateSchedule();
 
+}
+
+void Game::drawDisplay() {
+    //current time
+    getWindow()->draw(__s_getCurrTimeShape__());
+    getWindow()->draw(__t_getCurrTime__());
+    //score/fine
+    getWindow()->draw(__s_getScoreAndFineShape__());
+    getWindow()->draw(__t_getScore__());
+    getWindow()->draw(__t_getFine__());
+    //timetable title
+    getWindow()->draw(__s_getTimeTableTitle__());
+    getWindow()->draw(__t_getTimeTableTitle__());
+
+    //timeTable (first five)
+    if(getLevel()->getAirplanes().size() < 5)
+        for(int i = 0; i < getLevel()->getAirplanes().size(); ++i) {
+            getWindow()->draw(*__s_getTimeTableShape__()[i]);
+            getWindow()->draw(*__t_getTimeTableText__()[i]);
+        }
+    else {
+        for(int i = 0; i < 5; ++i) {
+            getWindow()->draw(*__s_getTimeTableShape__()[i]);
+            getWindow()->draw(*__t_getTimeTableText__()[i]);
+        }
+    }
+    //airplaneInfo
+    getWindow()->draw(__s_getAirplaneInfo__());
+    //buttons
+    getWindow()->draw(__s_getApproveButton__());
+    getWindow()->draw(__s_getDismissButton__());
 }

@@ -23,6 +23,7 @@ public:
 	void updateSchedule();
 	void updateDisplay();
 
+	void drawDisplay();
 
 	void setWindow(sf::RenderWindow* new_window) { window = new_window; }
 	void setLevel(Level* new_level) { level = new_level; }
@@ -52,6 +53,7 @@ public:
 	sf::RectangleShape __s_getApproveButton__() {return _s_approveButton;}
 	sf::RectangleShape __s_getDismissButton__() {return _s_dismissButton;}
 
+	sf::RectangleShape __s_getAirplaneInfo__() {return _s_airplaneInfo_; }
 private:
 	sf::RenderWindow* window;
 	sf::Texture bg_texture;
@@ -80,6 +82,8 @@ private:
 	sf::RectangleShape _s_approveButton;
 	sf::RectangleShape _s_dismissButton;
 
+	//Airplane info
+	sf::RectangleShape _s_airplaneInfo_;
 
 	Display* display;
 
