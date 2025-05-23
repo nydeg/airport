@@ -80,11 +80,11 @@ void Game::renderDisplay(string fontPath) {
     }
 
     //create buttons
-    _s_approveButton.setSize(sf::Vector2f(150, 100));
+    _s_approveButton.setSize(sf::Vector2f(150, 150));
     _s_approveButton.setFillColor(sf::Color::Green);
     _s_approveButton.setPosition(START_SHAPES_X, 850);
 
-    _s_dismissButton.setSize(sf::Vector2f(150, 100));
+    _s_dismissButton.setSize(sf::Vector2f(150, 150));
     _s_dismissButton.setFillColor(sf::Color::Red);
     _s_dismissButton.setPosition(START_SHAPES_X + 150 , 850);
 
