@@ -85,14 +85,19 @@ void Game::renderDisplay(string fontPath) {
     _s_airplaneInfo_.setPosition(START_SHAPES_X, START_SHAPES_Y + 550);
 
     //create buttons
+    _s_texture_approve.loadFromFile("./assets/Approve.png");
+    _s_approveButton.setTexture(&_s_texture_approve);
+    //_s_approveButton.setFillColor(sf::Color::Green);
     _s_approveButton.setSize(sf::Vector2f(150, 150));
-    _s_approveButton.setFillColor(sf::Color::Green);
-    _s_approveButton.setPosition(START_SHAPES_X, 850);
+    _s_approveButton.setPosition(START_SHAPES_X, 880);
+    _s_approveButton.setScale({ 1,0.8 });
 
+    _s_texture_dismiss.loadFromFile("./assets/Denied.png");
+    _s_dismissButton.setTexture(&_s_texture_dismiss);
     _s_dismissButton.setSize(sf::Vector2f(150, 150));
-    _s_dismissButton.setFillColor(sf::Color::Red);
-    _s_dismissButton.setPosition(START_SHAPES_X + 150 , 850);
-
+    //_s_dismissButton.setFillColor(sf::Color::Red);
+    _s_dismissButton.setPosition(START_SHAPES_X + 150 , 880);
+    _s_dismissButton.setScale({ 1,0.8 });
 
 }
 

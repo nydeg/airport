@@ -18,13 +18,19 @@ int main() {
             menu_game.event_handler(&window, &event, &game);
         }
 
+        sf::String none_string = "";
+        if (menu_game.getinputText().getString() != none_string) {
+            menu_game.getInputBox()->setFillColor(sf::Color::Black);
+        }else {
+            menu_game.getInputBox()->setFillColor(sf::Color::Transparent);
+        }
+
         window.clear();
         window.draw(menu_game.getBackground());
         window.draw(menu_game.getTitle());
-        window.draw(menu_game.getInputBox());
+        window.draw(*menu_game.getInputBox());
         window.draw(menu_game.getinputText());
         window.draw(menu_game.getButton());
-        window.draw(menu_game.getButtonText());
         window.display();
     }
 

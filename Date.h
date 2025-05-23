@@ -3,6 +3,8 @@
 #define DATE_H
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
+#include <string>
+#include <sstream>
 using std::cout;
 using std::string;
 class Date {

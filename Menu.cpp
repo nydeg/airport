@@ -19,37 +19,37 @@
 void Menu::renderInterface(){
 
     //sf::Text title("ENTER YOUR NAME", font, 40);
-    title.setString("ENTER YOUR NAME");
-    title.setFont(font);
-    title.setCharacterSize(40);
-    title.setFillColor(sf::Color::White);
-    title.setPosition(250, 200);
+    //title.setString("ENTER YOUR NAME");
+    //title.setFont(font);
+    //title.setCharacterSize(40);
+    //title.setFillColor(sf::Color::White);
+    //title.setPosition(250, 200);
 
     //sf::RectangleShape inputBox(sf::Vector2f(400, 50));
-    inputBox.setSize(sf::Vector2f(400, 50));
-    inputBox.setFillColor(sf::Color::Black);
+    inputBox.setSize(sf::Vector2f(550, 70));
+    inputBox.setFillColor(sf::Color::Transparent);
     inputBox.setOutlineThickness(2);
     inputBox.setOutlineColor(sf::Color::White);
-    inputBox.setPosition(200, 300);
+    inputBox.setPosition(60, 480);
 
     inputText.setString("");
     inputText.setFont(font);
     inputText.setCharacterSize(30);
     inputText.setFillColor(sf::Color::White);
-    inputText.setPosition(210, 305);
+    inputText.setPosition(70, 490);
 
-    //sf::RectangleShape button(sf::Vector2f(150, 50)); => Sprite
-    button.setSize(sf::Vector2f(150, 50));
-    button.setFillColor(sf::Color::Green);
-    button.setPosition(325, 400);
-    //button.setTexture();
+
+    startGame_texture.loadFromFile("./assets/ENTER.png");
+    button.setTexture(&startGame_texture);
+    button.setSize(sf::Vector2f(175, 96));
+    button.setPosition(75, 627);
 
     //sf::Text buttonText("ENTER", font, 30);
-    buttonText.setString(" START");
+    /*buttonText.setString(" START");
     buttonText.setFont(font);
     buttonText.setCharacterSize(30);
     buttonText.setFillColor(sf::Color::White);
-    buttonText.setPosition(335, 405);
+    buttonText.setPosition(335, 405);*/
 }
 
 void Menu::event_handler(sf::RenderWindow* window, sf::Event* event, Game* game){

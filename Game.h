@@ -18,7 +18,6 @@ class Game
 public:
 
 
-
 	void renderDisplay(string fontPath);
 	void updateScoreAndFine();
 	void updateSchedule();
@@ -78,7 +77,9 @@ private:
 
 	//buttons
 	sf::RectangleShape _s_approveButton;
+	sf::Texture _s_texture_approve;
 	sf::RectangleShape _s_dismissButton;
+	sf::Texture _s_texture_dismiss;
 
 	//Airplane info
 	sf::RectangleShape _s_airplaneInfo_;
