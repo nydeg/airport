@@ -6,10 +6,10 @@
 #include "Game.h"
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Main Menu");
+    sf::RenderWindow window(sf::VideoMode(1024*0.666, 1536*0.666), "Main Menu");
 
     Game game;
-    Menu menu_game("./assets/ofont.ru_Menlo.ttf", "./assets/airoport final.png");
+    Menu menu_game("./assets/ofont.ru_Menlo.ttf", "./assets/menu.png");
     menu_game.renderInterface();
 
     while (window.isOpen()) {
