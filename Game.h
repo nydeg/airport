@@ -22,6 +22,7 @@ public:
 	void updateScoreAndFine();
 	void updateSchedule();
 	void updateDisplay();
+	void event_handler(sf::Event* event);
 
 	void drawDisplay();
 

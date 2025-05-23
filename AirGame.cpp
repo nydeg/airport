@@ -18,13 +18,6 @@ int main() {
             menu_game.event_handler(&window, &event, &game);
         }
 
-        sf::String none_string = "";
-        if (menu_game.getinputText().getString() != none_string) {
-            menu_game.getInputBox()->setFillColor(sf::Color::Black);
-        }else {
-            menu_game.getInputBox()->setFillColor(sf::Color::Transparent);
-        }
-
         window.clear();
         window.draw(menu_game.getBackground());
         window.draw(menu_game.getTitle());
@@ -47,9 +40,7 @@ int main() {
     while (game.getWindow()->isOpen()) {
         sf::Event event;
         while (game.getWindow()->pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
-                game.getWindow()->close();
-            }
+            game.event_handler(&event);
         }
         game.getWindow()->clear();
         game.getWindow()->draw(game.getBackground());

@@ -62,6 +62,9 @@ void Menu::event_handler(sf::RenderWindow* window, sf::Event* event, Game* game)
         else if (event->text.unicode < 128 && event->text.unicode != '\b') {
             playerName += static_cast<char>(event->text.unicode);
         }
+        if (playerName.empty()) inputBox.setFillColor(sf::Color::Transparent);
+        else inputBox.setFillColor(sf::Color::Black);
+
         inputText.setString(playerName);
     }
 

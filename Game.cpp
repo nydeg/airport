@@ -192,3 +192,20 @@ void Game::setBackground(string url_bg){
 	bg_texture.loadFromFile(url_bg);
 	background.setTexture(bg_texture);
 }
+
+void Game::event_handler(sf::Event* event) {
+    if (event->type == sf::Event::Closed) {
+        getWindow()->close();
+    }
+
+    if (event->type == sf::Event::MouseButtonReleased) {
+        sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
+
+        if (_s_approveButton.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+            cout << "APPROVE" << endl;
+        }
+        else if (_s_dismissButton.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+            cout << "I DON'\T KNOW" << endl;
+        }
+    }
+}
