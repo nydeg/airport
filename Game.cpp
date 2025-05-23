@@ -6,6 +6,51 @@
 #define START_TEXTS_X 1610
 #define START_TEXTS_Y 35
 
+void Game::event_handler(sf::Event* event) {
+    if (event->type == sf::Event::Closed) {
+        getWindow()->close();
+    }
+
+    //cout << level->getAirplanes().front()->getStatus() << "\n";
+
+    if (event->type == sf::Event::MouseButtonReleased && (level->getAirplanes().front()->getStatus() == "requesting_boarding" || level->getAirplanes().front()->getStatus() == "requesting_takeoff")) {
+        sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
+
+        cout << 1 << "\n";
+        // pressed approve button
+
+
+        if (_s_approveButton.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+            cout << "APPROVE" << endl;
+            flag_approve = 1;
+        }
+        else if (_s_dismissButton.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
+            cout << "I DON'\T KNOW" << endl;
+            // pressed denied button
+            Date prevTime = level->getAirplanes().front()->getTimeOfAction();
+            level->getAirplanes().front()->setTimeOfAction(level->getAirplanes().front()->getTimeOfAction() + 120);
+            flag_approve = 0;
+        }
+
+        Airstrip *selectedAirstrip = nullptr;
+
+        for(int i = 0; i < level->getAirstrips().size(); ++i) {
+            if(level->getAirstrips()[i]->__s_getAirstripShape__().getGlobalBounds().contains(mousePos.x, mousePos.y) && flag_approve) {
+                if (level->getAirplanes().front()->getStatus() == "requesting_boarding") {
+                    level->getAirplanes().front()->setStatus("boarding");
+                    selectedAirstrip = level->getAirstrips()[i];
+                }
+                else if (level->getAirplanes().front()->getStatus() == "requesting_takeoff") {
+                    level->getAirplanes().front()->setStatus("take_off");
+                    selectedAirstrip = level->getAirstrips()[i];
+                }
+            }
+        }
+
+    }
+}
+
+
 void Game::updateGame() {
 
     //airstrips drawing
@@ -13,9 +58,20 @@ void Game::updateGame() {
         getWindow()->draw(level->getAirstrips()[i]->__s_getAirstripShape__());
     }
 
-    if(display->d_getCurrTime() == level->getAirplanes().front()->getTimeOfAction()) {
 
+    if(display->d_getCurrTime() == level->getAirplanes().front()->getTimeOfAction()) {
+        if(level->getAirplanes().front()->getStatus() == "awaiting_boarding")
+            level->getAirplanes().front()->setStatus("requesting_boarding");
+        if(level->getAirplanes().front()->getStatus() == "awaiting_takeoff")
+            level->getAirplanes().front()->setStatus("requesting_takeoff");
     }
+
+
+    if (level->getAirplanes().front()->getStatus() == "requesting_takeoff" || level->getAirplanes().front()->getStatus() == "requesting_boarding") return;
+    updateDisplay();
+
+
+
 
     for(int i = 0; i < level->getAirplanes().size(); ++i) {
         level->getAirplanes()[i]->work(level, dispatcher, level->getAirstrips()[0], level->getAirplanes()[i]->getX(), level->getAirplanes()[i]->getY());

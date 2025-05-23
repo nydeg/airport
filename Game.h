@@ -32,6 +32,7 @@ public:
 	void setLevel(Level* new_level) { level = new_level; }
 	void setBackground(string url_bg);
 
+	void event_handler(sf::Event* event);
 	//setters
 
 	void setDispatcher(Dispatcher* tmp){dispatcher = tmp;}
@@ -92,6 +93,8 @@ private:
 
 	Display* display;
 	Dispatcher* dispatcher;
+
+	int flag_approve = 0;
 
 };
 
