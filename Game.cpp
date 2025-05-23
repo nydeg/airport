@@ -182,3 +182,8 @@ void Game::drawDisplay() {
     getWindow()->draw(__s_getApproveButton__());
     getWindow()->draw(__s_getDismissButton__());
 }
+
+void Game::setBackground(string url_bg){
+	bg_texture.loadFromFile(url_bg);
+	background_game.setTexture(bg_texture);
+}

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <string>
 #include <SFML/Graphics.hpp>
 
 #include "Display.h"
@@ -27,10 +28,7 @@ public:
 
 	void setWindow(sf::RenderWindow* new_window) { window = new_window; }
 	void setLevel(Level* new_level) { level = new_level; }
-	void setBackground(string path) {
-		bg_texture.loadFromFile(path);
-		background.setTexture(bg_texture);
-	}
+	void setBackground(string url_bg);
 
 	//access
 	Level* getLevel(){return level;}

@@ -47,6 +47,7 @@ int main() {
         }
         game.getWindow()->clear();
         game.getWindow()->draw(game.getBackground());
+        game.getWindow()->draw(game.getBackground());
 
         //update game
         //...
