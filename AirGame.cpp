@@ -38,6 +38,7 @@ int main() {
 
     game.renderDisplay("./assets/ofont.ru_Menlo.ttf");
 
+    int i = 0;
     while (game.getWindow()->isOpen()) {
         sf::Event event;
         while (game.getWindow()->pollEvent(event)) {
@@ -50,11 +51,17 @@ int main() {
         game.getWindow()->draw(game.getBackground());
 
         //update game
-        //...
+
+        game.updateGame();
 
         //update Display
-        game.updateDisplay();
+        if(i % 997 == 0) {
+            game.updateDisplay();
+           i = 0;
+        }
+        ++i;
         game.drawDisplay();
+
 
         game.getWindow()->display();
     }

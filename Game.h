@@ -12,12 +12,14 @@ using namespace std;
 
 class Level;
 class Display;
+class Dispatcher;
 
 class Game
 {
 public:
 
 
+	void updateGame();
 
 	void renderDisplay(string fontPath);
 	void updateScoreAndFine();
@@ -29,6 +31,11 @@ public:
 	void setWindow(sf::RenderWindow* new_window) { window = new_window; }
 	void setLevel(Level* new_level) { level = new_level; }
 	void setBackground(string url_bg);
+
+	//setters
+
+	void setDispatcher(Dispatcher* tmp){dispatcher = tmp;}
+
 
 	//access
 	Level* getLevel(){return level;}
@@ -84,6 +91,7 @@ private:
 	sf::RectangleShape _s_airplaneInfo_;
 
 	Display* display;
+	Dispatcher* dispatcher;
 
 };
 

@@ -4,6 +4,8 @@
 
 #include<iostream>
 
+#include "SFML/Graphics.hpp"
+
 using namespace std;
 
 class Airstrip {
@@ -20,6 +22,8 @@ public:
 	pair<int, int> getStartInRoad() { return this->startInRoad; }
 	int getLength() { return length; }
 
+	sf::RectangleShape __s_getAirstripShape__(){return area; }
+
 private:
 	pair<int, int> start;
 	pair<int, int> end;
@@ -27,6 +31,8 @@ private:
 	pair<int, int> startInRoad;
 	int length; // compute from start and end
 	string status;
+
+	sf::RectangleShape area;
 };
 
 #endif AIRSTRIP_H

@@ -5,11 +5,29 @@
 #define START_SHAPES_Y 0
 #define START_TEXTS_X 1610
 #define START_TEXTS_Y 35
+
+void Game::updateGame() {
+
+    //airstrips drawing
+    for(int i = 0; i < level->getAirstrips().size(); ++i) {
+        getWindow()->draw(level->getAirstrips()[i]->__s_getAirstripShape__());
+    }
+
+    if(display->d_getCurrTime() == level->getAirplanes().front()->getTimeOfAction()) {
+
+    }
+
+    for(int i = 0; i < level->getAirplanes().size(); ++i) {
+        level->getAirplanes()[i]->work(level, dispatcher, level->getAirstrips()[0], level->getAirplanes()[i]->getX(), level->getAirplanes()[i]->getY());
+    }
+}
+
 void Game::renderDisplay(string fontPath) {
 
     //create Display
     Display* tmp = new Display(&level->getAirplanes(), &level->getAirstrips());
     display = tmp;
+    display->setCurrDate(level->getAirplanes().front()->getTimeOfAction());
 
     font.loadFromFile(fontPath);
 

@@ -15,4 +15,9 @@ Airstrip::Airstrip(pair<int, int> st, pair<int, int> ed)
 	length = sqrt((st.first - ed.first) * (st.first - ed.first) + (st.second - ed.second) * (st.second - ed.second));
 	status = "free";
 	cout << "airstrip was created with parameters\n";
+
+	area.setSize(sf::Vector2f(length, 100));
+	area.setFillColor(sf::Color::White);
+	area.setPosition(st.first, st.second);
+
 }

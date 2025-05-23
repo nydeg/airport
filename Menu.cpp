@@ -1,6 +1,8 @@
 #include "Menu.h"
 #include "Game.h"
 #include "Level.h"
+#include "Dispatcher.h"
+
 
 //Menu::~Menu()
 //{
@@ -53,6 +55,9 @@ void Menu::renderInterface(){
 }
 
 void Menu::event_handler(sf::RenderWindow* window, sf::Event* event, Game* game){
+
+    Dispatcher* newDispatcher = new Dispatcher;
+
     if (event->type == sf::Event::Closed) window->close();
 
     if (event->type == sf::Event::TextEntered) {
@@ -85,6 +90,14 @@ void Menu::event_handler(sf::RenderWindow* window, sf::Event* event, Game* game)
                             istringstream iss(line.substr(first_space + 1));
 
                             iss >> last_level >> best_score >> loses;
+
+                            newDispatcher->setBestScore(best_score);
+                            newDispatcher->setCurrentScore(0);
+                            newDispatcher->setLastLevel(last_level);
+                            newDispatcher->setLosesNumber(loses);
+
+                            game->setDispatcher(newDispatcher);
+
                             cout << name << last_level << best_score << loses << endl;
                             break;
                         }
