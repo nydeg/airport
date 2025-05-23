@@ -6,8 +6,9 @@
 #include "Cilivian.h"
 #include "Cargo.h"
 #include "Military.h"
-
+#include "Date.h"
 #include "Airstrip.h"
+
 
 Level::Level(int levelNumber)
 {
@@ -130,6 +131,14 @@ Level::Level(int levelNumber)
 }
 
 Level::Level() {};
+
+void Level::initLapCoordinates() {
+	this->lapCoordinates.push_back({10, 10, "upper-right"});
+	this->lapCoordinates.push_back({0, 10, "upper-left"});
+	this->lapCoordinates.push_back({0, 0, "lower-left"});
+	this->lapCoordinates.push_back({10, 0, "lower-right"});
+}
+
 
 
 bool CompareByDate(Airplane* ft, Airplane* sd)

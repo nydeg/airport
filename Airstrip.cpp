@@ -1,5 +1,6 @@
 #include "Airstrip.h"
 #include<math.h>
+
 Airstrip::Airstrip()
 {
 	start = { 0,0 };

@@ -14,6 +14,9 @@ public:
 	Cargo(int boardNumber, string stata, Date date, int maxLaps);
 
 	~Cargo() { cout << "Cargo was deleted\n"; }
+
+	void work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, int x, int y) override;
+
 private:
 };
 

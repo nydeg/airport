@@ -14,6 +14,9 @@ public:
 	Civilian(int boardNumber, string stata, Date date, int maxLaps);
 
 	~Civilian() { cout << "Civilian was deleted\n"; }
+
+	void work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, int x, int y) override;
+
 private:
 
 };
