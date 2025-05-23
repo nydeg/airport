@@ -31,8 +31,8 @@ int main() {
     //delete menu_game;
 
     // MAIN GAME
-    sf::RenderWindow newWindow(sf::VideoMode(1700, 900), "Game Window");
-    game.setBackground("./assets/syeah final.png");
+    sf::RenderWindow newWindow(sf::VideoMode(1900, 1000), "Game Window");
+    game.setBackground("./assets/level 1.png");
     game.setWindow(&newWindow);
 
 

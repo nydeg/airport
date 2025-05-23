@@ -9,9 +9,6 @@
 
 class Civilian : public Airplane {
 public:
-
-	void work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, int x, int y) override;
-
 	Civilian() { cout << "Civilian was created\n"; }
 
 	Civilian(int boardNumber, string stata, Date date, int maxLaps);
