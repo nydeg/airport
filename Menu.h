@@ -17,8 +17,9 @@ public:
 		font.loadFromFile(font_url);
 		bg_texture.loadFromFile(bg_url);
 		background.setTexture(bg_texture);
+        background.scale({0.666, 0.666});
 	}
-    ~Menu();
+    //~Menu();
 
     sf::Text getinputText() { return inputText; }
     sf::Text getTitle() { return title; }

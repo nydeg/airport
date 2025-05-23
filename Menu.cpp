@@ -2,19 +2,19 @@
 #include "Game.h"
 #include "Level.h"
 
-Menu::~Menu()
-{
-    delete &font;
-    delete &playerName;
-    delete &bg_texture;
-    delete &background;
-    delete &inputText;
-    delete &button;
-    delete &title;
-    delete &inputBox;
-    delete &buttonText;
-    cout << "tripi tropa" << endl;
-}
+//Menu::~Menu()
+//{
+//    delete &font;
+//    delete &playerName;
+//    delete &bg_texture;
+//    delete &background;
+//    delete &inputText;
+//    delete &button;
+//    delete &title;
+//    delete &inputBox;
+//    delete &buttonText;
+//    cout << "tripi tropa" << endl;
+//}
 
 void Menu::renderInterface(){
     // Текст над полем ввода

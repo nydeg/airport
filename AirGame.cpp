@@ -6,11 +6,12 @@
 #include "Game.h"
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Main Menu");
-
+    sf::RenderWindow window(sf::VideoMode(1024*0.666, 1536*0.666), "Main Menu");
+    
     Game game;
-    Menu menu_game("./assets/ofont.ru_Menlo.ttf", "./assets/airoport final.png");
+    Menu menu_game("./assets/ofont.ru_Menlo.ttf", "./assets/menu.png");
     menu_game.renderInterface();
+    menu_game.getBackground();
 
     while (window.isOpen()) {
         sf::Event event;
@@ -31,8 +32,10 @@ int main() {
     //delete menu_game;
 
     // MAIN GAME
-    sf::RenderWindow newWindow(sf::VideoMode(800, 600), "Game Window");
+    sf::RenderWindow newWindow(sf::VideoMode(1920, 1024), "Game Window");
     game.setWindow(&newWindow);
+    game.setBackground("./assets/level_1.png");
+
     while (game.getWindow()->isOpen()) {
         sf::Event event;
         while (game.getWindow()->pollEvent(event)) {
@@ -40,6 +43,7 @@ int main() {
                 game.getWindow()->close();
         }
         game.getWindow()->clear();
+        game.getWindow()->draw(game.getBackground());
         game.getWindow()->display();
     }
 
