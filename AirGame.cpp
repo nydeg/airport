@@ -31,7 +31,7 @@ int main() {
 
     // MAIN GAME
     sf::RenderWindow newWindow(sf::VideoMode(1900, 1000), "Game Window");
-    game.setBackground("./assets/level 1.png");
+    game.setBackground("./assets/level " + to_string(game.getLevel()->getLevelNum()) + ".png");
     game.setWindow(&newWindow);
 
 

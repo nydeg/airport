@@ -13,6 +13,7 @@
 Level::Level(int levelNumber)
 {
 	string line;
+	this->level_num = levelNumber;
 
 	std::ifstream in("levels/" + to_string(levelNumber) + ".txt");
 	if (in.is_open())

@@ -25,14 +25,16 @@ public:
 
 	void scheduleSort();
 
-
 	//access
 	int getFine() { return fine; }
-	vector<Airstrip*>& getAirstrips() { return airstrips; }
-	vector<Airplane*>& getAirplanes() { return airplanes; }
+	int getLevelNum() { return level_num; }
 	int getScore() { return score; }
 	int getCountOfAirplanes() { return countOfAirplanes; }
+
+	vector<Airstrip*>& getAirstrips() { return airstrips; }
+	vector<Airplane*>& getAirplanes() { return airplanes; }
 	vector<LapCoordinate> getLapCoordinates() { return this->lapCoordinates; }
+
 	pair<int, int> getHangarForTakeoffCoordinates() { return this->hangarForTakeoffCoordinates; }
 	pair<int, int> getHangarForBoardingCoordinates() { return this->hangarForBoardingCoordinates; }
 	pair<int, int> getRoadHangarForTakeoffCoordinates() { return this->roadHangarForTakeoffCoordinates; }
@@ -40,6 +42,7 @@ public:
 
 private:
 	int fine;
+	int level_num;
 	vector<Airstrip*> airstrips;
 	vector<Airplane*> airplanes;
 	int score;
