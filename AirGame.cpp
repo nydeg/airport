@@ -41,17 +41,33 @@ int main() {
     while (game.getWindow()->isOpen()) {
         sf::Event event;
         while (game.getWindow()->pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed) {
                 game.getWindow()->close();
+            }
         }
         game.getWindow()->clear();
         game.updateDisplay();
         game.getWindow()->draw(game.getBackground());
         //
+        //current time
         game.getWindow()->draw(game.__s_getCurrTimeShape__());
         game.getWindow()->draw(game.__t_getCurrTime__());
+        //score/fine
+        game.getWindow()->draw(game.__s_getScoreAndFineShape__());
+        game.getWindow()->draw(game.__t_getScore__());
+        game.getWindow()->draw(game.__t_getFine__());
+        //timetable title
+        game.getWindow()->draw(game.__s_getTimeTableTitle__());
+        game.getWindow()->draw(game.__t_getTimeTableTitle__());
 
-        //
+        //timeTable
+        for(int i = 0; i < game.getLevel()->getAirplanes().size(); ++i) {
+            game.getWindow()->draw(*game.__s_getTimeTableShape__()[i]);
+            game.getWindow()->draw(*game.__t_getTimeTableText__()[i]);
+        }
+        //buttons
+        game.getWindow()->draw(game.__s_getApproveButton__());
+        game.getWindow()->draw(game.__s_getDismissButton__());
 
         game.getWindow()->display();
     }

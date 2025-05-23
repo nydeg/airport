@@ -35,7 +35,6 @@ public:
     vector<Airplane*>* getSchedule(){return schedule;}
     vector<Airstrip*>* getAirstrips(){return strips;}
 
-
 private:
 
 

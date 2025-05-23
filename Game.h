@@ -19,6 +19,8 @@ public:
 
 
 	void renderDisplay(string fontPath);
+	void updateScoreAndFine();
+	void updateSchedule();
 	void updateDisplay();
 
 
@@ -33,8 +35,22 @@ public:
 	Level* getLevel(){return level;}
 	sf::Sprite getBackground(){ return background; }
 	sf::RenderWindow* getWindow() { return window; }
+
 	sf::Text __t_getCurrTime__() {return _t_currTime_;}
 	sf::RectangleShape __s_getCurrTimeShape__() {return _s_currTime_;}
+
+	sf::Text __t_getScore__(){return _t_score_;}
+	sf::Text __t_getFine__(){return _t_fine_;}
+	sf::RectangleShape __s_getScoreAndFineShape__(){return _s_ScoreAndFine_;}
+
+	sf::Text __t_getTimeTableTitle__(){return _t_titleOfTimeTable_;}
+	sf::RectangleShape __s_getTimeTableTitle__(){return _s_titleOfTimeTable_;}
+
+	vector<sf::RectangleShape*>& __s_getTimeTableShape__(){return _s_timeTable_;}
+	vector<sf::Text*>& __t_getTimeTableText__() {return _t_timeTable_;}
+
+	sf::RectangleShape __s_getApproveButton__() {return _s_approveButton;}
+	sf::RectangleShape __s_getDismissButton__() {return _s_dismissButton;}
 
 private:
 	sf::RenderWindow* window;
@@ -42,9 +58,28 @@ private:
 	sf::Sprite background;
 	Level* level;
 
+	//CurrentTime
 	sf::Font font;
 	sf::Text _t_currTime_;
 	sf::RectangleShape _s_currTime_;
+
+	//Score/Fine
+	sf::RectangleShape _s_ScoreAndFine_;
+	sf::Text _t_score_; //from dispatcher
+	sf::Text _t_fine_;
+
+
+	//TimeTable
+	sf::RectangleShape _s_titleOfTimeTable_;
+	sf::Text _t_titleOfTimeTable_;
+
+	vector<sf::RectangleShape*> _s_timeTable_;
+	vector<sf::Text*> _t_timeTable_;
+
+	//buttons
+	sf::RectangleShape _s_approveButton;
+	sf::RectangleShape _s_dismissButton;
+
 
 	Display* display;
 
