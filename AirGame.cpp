@@ -16,5 +16,5 @@ int main()
     int raz = currDate - cD;
     cout << "\nThis is ZADERJKA IN MINUTES --> " << raz << "\n";
     */
-//    std::cout << "Hello World!\n";
+    std::cout << "Hello World!\n";
 }
