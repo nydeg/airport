@@ -422,12 +422,13 @@ void Game::updateAirplanes() {
 
 void Game::checkCollisions(vector<sf::Sprite> airplaneSprites, vector<Airplane*> airplanes) {
     for (int i = 0; i < airplaneSprites.size() - 1; i++) {
-        for (int j = i; j < airplaneSprites.size(); j++) {
+        for (int j = i + 1; j < airplaneSprites.size() - 1; j++) {
             if (airplanes[i]->getStatus() == "awaiting_boarding" && airplanes[j]->getStatus() == "awaiting_boarding") {
                 continue;
             }
             if (airplaneSprites[i].getGlobalBounds().intersects(airplaneSprites[j].getGlobalBounds())) {
                 cout << airplanes[i]->getStatus() << " " << airplanes[j]->getStatus() << endl;
+                cout << i << " " << j << endl;
                 cout << "pizda samoletam" << endl;
                 return;
             }
