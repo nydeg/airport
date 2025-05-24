@@ -40,6 +40,9 @@ public:
 	pair<int, int> getRoadHangarForTakeoffCoordinates() { return this->roadHangarForTakeoffCoordinates; }
 	pair<int, int> getRoadHangarForBoardingCoordinates() { return this->roadHangarForBoardingCoordinates; }
 
+	int getIndexOfLastDeletedPlane() { return this->indexOfLastDeletedPlane; }
+	void setIndexOfLastDeletedPlane(int idx) { this->indexOfLastDeletedPlane = idx; }
+
 private:
 	int fine;
 	int level_num;
@@ -54,6 +57,8 @@ private:
 	pair<int, int> roadHangarForTakeoffCoordinates;
 	pair<int, int> hangarForBoardingCoordinates;
 	pair<int, int> roadHangarForBoardingCoordinates;
+
+	int indexOfLastDeletedPlane;
 
 
 

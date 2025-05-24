@@ -36,7 +36,7 @@ public:
 	void TakeOffStartPoint(int startX, int startY);
 	void TakeOffEndPoint(Level* level, Dispatcher* dispatcher, int endX, int endY);
 
-	void DeleteAirplane(Level *level);
+	int DeleteAirplane(Level *level);
 	void MoveInLap(Level *level);
 	void MoveToAirstrip(Level *level, int airstripNumber);
 	void MoveToTakeoff(Level *level, int airstripNumber);
@@ -62,6 +62,7 @@ public:
 	int getX() { return this->x; }
 	int getY() { return this->y; }
 	int getCornenrInd() { return ind; }
+	int getIndex() { return ind;}
 	string getType() { return type; }
 
 	sf::RectangleShape getTestShape(){return test;}
@@ -93,11 +94,10 @@ private:
 	Date timeOfAction;
 	int maxLaps;
 
-	int ind = 0;
+	int ind = 0; // pos in lap [0, 3]
 
 	//Date takeOffTime;
 	//Date boardingTime;
-	
 
 	int boardNumber;
 	//Date timeToUp;

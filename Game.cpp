@@ -100,7 +100,6 @@ void Game::updateGame() {
         }
     }
 
-    //updateAirplanes();
 
     if (level->getAirplanes().front()->getStatus() == "requesting_takeoff" || level->getAirplanes().front()->getStatus() == "requesting_boarding") return;
 
@@ -108,7 +107,6 @@ void Game::updateGame() {
 
     if(level->getAirplanes().front()->getStatus() == "awaiting_boarding" || level->getAirplanes().front()->getStatus() == "awaiting_takeoff" ) {
         updateDisplay(); //Curr time += 1
-        //updateAirplanes();
     }
 
 updateAirplanes();
@@ -365,8 +363,7 @@ void Game::updateAirplanes() {
     auto level = getLevel();
     auto airplanes = level->getAirplanes();
 
-    if (airplaneSprites.size() != airplanes.size()) {
-        airplaneSprites.clear();
+    if (airplaneSprites.empty()) {
         for (auto& airplane : airplanes) {
             sf::Sprite plane;
             string type = airplane->getType();
@@ -380,20 +377,26 @@ void Game::updateAirplanes() {
             }
 
             plane.scale(sf::Vector2f(0.5f, 0.5f));
+            auto size = plane.getLocalBounds();
+            plane.setOrigin(size.left + size.width / 2, size.top + size.height / 2);
             plane.setPosition(airplane->getX(), airplane->getY());
 
             airplaneSprites.push_back(plane);
         }
     }
-    /*
-    for (auto& airplane : airplanes) {
-        airplane->work(level, dispatcher, level->getAirstrips()[0], airplane->getX(), airplane->getY());
-        //cout << "huy" << endl;
-    }
-    */
 
-    for (auto& airplane : airplanes) {
-        airplane->work(level, dispatcher, level->getAirstrips()[0], airplane->getX(), airplane->getY());
+    if (airplaneSprites.size() != airplanes.size()) {
+        airplaneSprites.erase(airplaneSprites.begin() + level->getIndexOfLastDeletedPlane());
+    }
+
+    int indexOfPos;
+
+    for (int i = 0; i < airplaneSprites.size(); i++) {
+        indexOfPos = airplanes[i]->getIndex();
+        airplanes[i]->work(level, dispatcher, selectedAirstrip, airplanes[i]->getX(), airplanes[i]->getY());
+        if (airplanes[i]->getIndex() != indexOfPos) {
+            airplaneSprites[i].rotate(90.f);
+        }
     }
 
     for (int i = 0; i < airplaneSprites.size(); i++) {

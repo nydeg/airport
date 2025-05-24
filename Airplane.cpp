@@ -109,8 +109,7 @@ void Airplane::MoveFromAirstripToHangar(Level *level, int airstripNumber) {
 }
 
 
-
-void Airplane::DeleteAirplane(Level *level) {
+int Airplane::DeleteAirplane(Level *level) {
     // int airplaneIndex = find(level->getAirplanes().begin(), level->getAirplanes().end(), this);
     int airplaneIndex = 0;
     for (int i = 0; i < level->getAirplanes().size(); i++) {
@@ -122,6 +121,8 @@ void Airplane::DeleteAirplane(Level *level) {
 
     level->getAirplanes().erase(level->getAirplanes().begin() + airplaneIndex);
     delete this;
+
+    return airplaneIndex;
 }
 
 void Airplane::Moving(int x, int y, string new_status) {
@@ -150,7 +151,7 @@ void Airplane::MovingNewLap(int x, int y) {
         }
 
     }else {
-        ind = (ind+1)%4;
+        ind = (ind + 1) % 4;
         cout << "--> " << ind << "\t" << getX() << " " << getY() << "\n";
     }
 
@@ -166,7 +167,8 @@ void Airplane::BoardingEndPoint(Level *level, Dispatcher *dispatcher, int endX, 
     } else {
 
         // delete plane
-        this->DeleteAirplane(level);
+        int index = this->DeleteAirplane(level);
+        level->setIndexOfLastDeletedPlane(index);
         // increase user score
         dispatcher->setCurrentScore(dispatcher->getCurrentScore() + 1);
     }
@@ -183,7 +185,8 @@ void Airplane::TakeOffEndPoint(Level* level, Dispatcher* dispatcher, int endX, i
     else {
 
         // delete plane
-        this->DeleteAirplane(level);
+        int index = this->DeleteAirplane(level);
+        level->setIndexOfLastDeletedPlane(index);
         // increase user score
         dispatcher->setCurrentScore(dispatcher->getCurrentScore() + 1);
     }
@@ -191,5 +194,6 @@ void Airplane::TakeOffEndPoint(Level* level, Dispatcher* dispatcher, int endX, i
 
 void Airplane::TakeOff(Level* level) {
     this->setStatus("take_off");
-    this->DeleteAirplane(level);
+    int index = this->DeleteAirplane(level);
+    level->setIndexOfLastDeletedPlane(index);
 }

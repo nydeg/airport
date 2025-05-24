@@ -22,6 +22,7 @@ public:
     void setCurrentScore(int score) { this->currentScore = score; }
     void setLosesNumber(int loses) { this->losesNumber = loses; }
 
+
 private:
     int fine;
     int lastLevel;
