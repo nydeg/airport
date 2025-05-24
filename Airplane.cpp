@@ -22,7 +22,8 @@ Airplane::Airplane()
 	Date currDate;
 	timeOfAction = currDate;
 
-
+    x = 0;
+    y = 0;
 
 	cout << "airplane was created\n";
 

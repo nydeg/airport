@@ -13,14 +13,17 @@ public:
     string getName() { return this->name; }
     int getLosesNumber() { return this->losesNumber; }
     int getCurrentScore() { return this->currentScore; }
+    int getFine(){return fine;}
 
     //setters
+    void setFine(int tmp){fine = tmp;}
     void setLastLevel(int level) { this->lastLevel = level; }
     void setBestScore(int score) { this->bestScore = score; }
     void setCurrentScore(int score) { this->currentScore = score; }
     void setLosesNumber(int loses) { this->losesNumber = loses; }
 
 private:
+    int fine;
     int lastLevel;
     int bestScore;
     int currentScore;

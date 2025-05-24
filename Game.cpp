@@ -1,4 +1,6 @@
 #include "Game.h"
+
+#include "Dispatcher.h"
 #define DISPLAYS_CHARACTER_SIZE 17
 
 #define START_SHAPES_X 1600
@@ -24,12 +26,17 @@ void Game::event_handler(sf::Event* event) {
             flag_approve = 1;
         }
         else if (_s_dismissButton.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
-            cout << "I DON'\t KNOW" << endl;
-            // pressed denied button
 
+            dispatcher->setFine(dispatcher->getFine() + 1);
+            updateScoreAndFine();
+
+            //cout << level->getAirplanes().size() << "\n";
+            cout << "I DON'\t KNOW " << level->getAirplanes().front()->getStatus()<< endl;
+            // pressed denied button
+            //cout << 1 << endl;
             if(level->getAirplanes().front()->getStatus() == "requesting_boarding") {
                 if(level->getAirplanes().front()->getMaxLaps() != 0) {
-                    level->getAirplanes().front()->setMaxLaps(level->getAirplanes().front()->getMaxLaps() - 1); // муменьшаем кол-во кругов!!!
+                    level->getAirplanes().front()->setMaxLaps(level->getAirplanes().front()->getMaxLaps() - 1); // уменьшаем кол-во кругов!!!
                 }
                 else {
                     cout << "\n\nYOU LOOSE!!!!!!\n\n";
@@ -40,24 +47,31 @@ void Game::event_handler(sf::Event* event) {
                 level->getAirplanes().front()->setStatus("awaiting_takeoff");
 
             }
+            //cout << 2 << endl;
             //Date prevTime = level->getAirplanes().front()->getTimeOfAction();
             level->getAirplanes().front()->setTimeOfAction(level->getAirplanes().front()->getTimeOfAction() + 120);
 
             flag_approve = 0;
         }
 
-        Airstrip *selectedAirstrip = nullptr;
-
         for(int i = 0; i < level->getAirstrips().size(); ++i) {
             if(level->getAirstrips()[i]->__s_getAirstripShape__().getGlobalBounds().contains(mousePos.x, mousePos.y) && flag_approve) {
                 if (level->getAirplanes().front()->getStatus() == "requesting_boarding") {
                     level->getAirplanes().front()->setStatus("boarding_startPoint");
                     selectedAirstrip = level->getAirstrips()[i];
+
+                    dispatcher->setCurrentScore(dispatcher->getCurrentScore() + 1);
+                    updateScoreAndFine();
+
                     flag_approve = 0;
                 }
                 else if (level->getAirplanes().front()->getStatus() == "requesting_takeoff") {
                     level->getAirplanes().front()->setStatus("take_off");
                     selectedAirstrip = level->getAirstrips()[i];
+
+                    dispatcher->setCurrentScore(dispatcher->getCurrentScore() + 1);
+                    updateScoreAndFine();
+
                     flag_approve = 0;
                 }
             }
@@ -70,9 +84,11 @@ void Game::event_handler(sf::Event* event) {
 void Game::updateGame() {
 
     //airstrips drawing
+    /*
     for(int i = 0; i < level->getAirstrips().size(); ++i) {
         getWindow()->draw(level->getAirstrips()[i]->__s_getAirstripShape__());
     }
+    */
 
 
     for(int i = 0; i < level->getAirplanes().size(); ++i) {
@@ -94,7 +110,7 @@ void Game::updateGame() {
 
 
     for(int i = 0; i < level->getAirplanes().size(); ++i) {
-        level->getAirplanes()[i]->work(level, dispatcher, level->getAirstrips()[0], level->getAirplanes()[i]->getX(), level->getAirplanes()[i]->getY());
+        level->getAirplanes()[i]->work(level, dispatcher, selectedAirstrip, level->getAirplanes()[i]->getX(), level->getAirplanes()[i]->getY());
     }
 }
 
@@ -124,13 +140,13 @@ void Game::renderDisplay(string fontPath) {
     _s_ScoreAndFine_.setFillColor(sf::Color::Yellow);
     _s_ScoreAndFine_.setPosition(START_SHAPES_X, START_SHAPES_Y+100);
 
-    _t_score_.setString("SCORE: ");
+    _t_score_.setString("SCORE: " + dispatcher->getCurrentScore());
     _t_score_.setFont(font);
     _t_score_.setCharacterSize(DISPLAYS_CHARACTER_SIZE);
     _t_score_.setFillColor(sf::Color::Black);
     _t_score_.setPosition(START_TEXTS_X, START_TEXTS_Y+100);
 
-    _t_fine_.setString("FINE: ");
+    _t_fine_.setString("FINE: " + dispatcher->getFine());
     _t_fine_.setFont(font);
     _t_fine_.setCharacterSize(DISPLAYS_CHARACTER_SIZE);
     _t_fine_.setFillColor(sf::Color::Black);
@@ -196,7 +212,21 @@ void Game::renderDisplay(string fontPath) {
 }
 
 void Game::updateScoreAndFine() {
+    _s_ScoreAndFine_.setSize(sf::Vector2f(300, 100));
+    _s_ScoreAndFine_.setFillColor(sf::Color::Yellow);
+    _s_ScoreAndFine_.setPosition(START_SHAPES_X, START_SHAPES_Y+100);
 
+    _t_score_.setString("SCORE: " + to_string(dispatcher->getCurrentScore()));
+    _t_score_.setFont(font);
+    _t_score_.setCharacterSize(DISPLAYS_CHARACTER_SIZE);
+    _t_score_.setFillColor(sf::Color::Black);
+    _t_score_.setPosition(START_TEXTS_X, START_TEXTS_Y+100);
+
+    _t_fine_.setString("FINE: " + to_string(dispatcher->getFine()));
+    _t_fine_.setFont(font);
+    _t_fine_.setCharacterSize(DISPLAYS_CHARACTER_SIZE);
+    _t_fine_.setFillColor(sf::Color::Black);
+    _t_fine_.setPosition(START_TEXTS_X + 170, START_TEXTS_Y+100);
 }
 
 void Game::updateSchedule() {
@@ -309,21 +339,4 @@ void Game::drawAirplaneInfo() {
 void Game::setBackground(string url_bg){
 	bg_texture.loadFromFile(url_bg);
 	background.setTexture(bg_texture);
-}
-
-void Game::event_handler(sf::Event* event) {
-    if (event->type == sf::Event::Closed) {
-        getWindow()->close();
-    }
-
-    if (event->type == sf::Event::MouseButtonReleased) {
-        sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
-
-        if (_s_approveButton.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
-            cout << "APPROVE" << endl;
-        }
-        else if (_s_dismissButton.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
-            cout << "I DON'\T KNOW" << endl;
-        }
-    }
 }

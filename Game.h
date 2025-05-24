@@ -102,6 +102,8 @@ private:
 	Display* display;
 	Dispatcher* dispatcher;
 
+	Airstrip* selectedAirstrip;
+
 	int flag_approve = 0;
 
 };

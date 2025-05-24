@@ -129,6 +129,9 @@ Level::Level(int levelNumber)
 
 	}
 	in.close();
+
+	initLapCoordinates();
+
 }
 
 Level::Level() {};

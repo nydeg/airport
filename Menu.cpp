@@ -98,6 +98,7 @@ void Menu::event_handler(sf::RenderWindow* window, sf::Event* event, Game* game)
                             newDispatcher->setCurrentScore(0);
                             newDispatcher->setLastLevel(last_level);
                             newDispatcher->setLosesNumber(loses);
+                            newDispatcher->setFine(0);
 
                             game->setDispatcher(newDispatcher);
 
