@@ -24,36 +24,41 @@ Airplane::Airplane()
 
     static std::random_device rd;  // Источник энтропии
     static std::mt19937 gen(rd()); // Генератор (Mersenne Twister)
-    std::uniform_int_distribution<> distrib(0, 3); // Равномерное распределение
+    std::uniform_int_distribution<> distrib(0, 100); // Равномерное распределение
 
-    ind = 1;
-    x = 30;
-    y = 30;
+    //ind = 1;
+    //x = 30;
+    //y = 30;
 
 
+    ind = distrib(gen)%4;
 
-    /*
-    ind = distrib(gen);
+    ind = 0;
 
     switch(ind) {
         case(0): {
             x = 30;
-            y = 30;
+
+            y = 870;
+            break;
         }
         case(1): {
-            x = 1480;
+            x = 30;
             y = 30;
+            break;
         }
         case(2): {
             x = 1480;
-            y = 870;
+            y = 30;
+            break;
         }
         case(3): {
-            x = 30;
+            x = 1480;
             y = 870;
+            break;
         }
     };
-*/
+
     test.setScale(sf::Vector2f(100,100));
     test.setFillColor(sf::Color::Red);
     test.setPosition(0,0);

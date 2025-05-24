@@ -45,6 +45,6 @@ void Cargo::work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, int x
 		this->BoardingEndPoint(level, dispatcher, airstrip->getEnd().first, airstrip->getEnd().second);
 	}
 	else if (this->getStatus() == "take_off") {
-		this->TakeOff(level);
+		this->TakeOffEndPoint(level, dispatcher, 0, airstrip->getEnd().second);
 	}
 }

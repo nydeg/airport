@@ -71,6 +71,9 @@ void Game::event_handler(sf::Event* event) {
                     level->getAirplanes().front()->setStatus("take_off");
                     selectedAirstrip = level->getAirstrips()[i];
 
+                    //level->getAirplanes().front()->setX(selectedAirstrip->getEnd().first);
+                    //level->getAirplanes().front()->setY(selectedAirstrip->getEnd().second);
+
                     dispatcher->setCurrentScore(dispatcher->getCurrentScore() + 1);
                     updateScoreAndFine();
 
