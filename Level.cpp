@@ -46,23 +46,32 @@ Level::Level(int levelNumber)
 
 			switch (line[0])
 			{
-			case('Y'): {
-				Military* temp = new Military(boardNumber, stata, fDate, maxLaps);
-				airplanes.push_back(temp);
-				break;
-			}
-			case('O'): {
-				Cargo* temp = new Cargo(boardNumber, stata, fDate, maxLaps);
-				airplanes.push_back(temp);
-				break;
-			}
-			case('N'): {
-				Civilian* temp = new Civilian(boardNumber, stata, fDate, maxLaps);
-				airplanes.push_back(temp);
-				break;
-			}
-			default:
-				cout << "OOOPS\n";
+				case('Y'): {
+					Military* temp = new Military(boardNumber, stata, fDate, maxLaps);
+					temp->setType("military");
+					temp->setX(0);
+					temp->setY(0);
+					airplanes.push_back(temp);
+					break;
+				}
+				case('O'): {
+					Cargo* temp = new Cargo(boardNumber, stata, fDate, maxLaps);
+					temp->setType("cargo");
+					//temp->setX(1000);
+					//temp->setY(200);
+					airplanes.push_back(temp);
+					break;
+				}
+				case('N'): {
+					Civilian* temp = new Civilian(boardNumber, stata, fDate, maxLaps);
+					temp->setType("civilian");
+					//temp->setX(1200);
+					//temp->setY(200);
+					airplanes.push_back(temp);
+					break;
+				}
+				default:
+					cout << "OOOPS\n";
 				break;
 			}
 
@@ -137,10 +146,10 @@ Level::Level(int levelNumber)
 Level::Level() {};
 
 void Level::initLapCoordinates() {
-	this->lapCoordinates.push_back({1580, 30, "upper-right"});
 	this->lapCoordinates.push_back({30, 30, "upper-left"});
-	this->lapCoordinates.push_back({30, 970, "lower-left"});
-	this->lapCoordinates.push_back({1580, 970, "lower-right"});
+	this->lapCoordinates.push_back({1480, 30, "upper-right"});
+	this->lapCoordinates.push_back({1480, 870, "lower-right"});
+	this->lapCoordinates.push_back({30, 870, "lower-left"});
 }
 
 

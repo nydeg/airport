@@ -43,8 +43,8 @@ int main() {
         game.getWindow()->clear();
         game.getWindow()->draw(game.getBackground());
 
-        if(i % 29 == 0) {
-        //if(i%1 == 0){
+        //if(i % 29 == 0) {
+        if(i%1 == 0){
             game.updateGame();
             i = 0;
         }
@@ -57,6 +57,10 @@ int main() {
         //update Display
 
         game.drawDisplay();
+
+
+        //game.updateAirplanes();
+        //game.drawAirplanes();
 
         /*
         //Airplanes drawing

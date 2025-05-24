@@ -100,18 +100,26 @@ void Game::updateGame() {
         }
     }
 
+    //updateAirplanes();
 
     if (level->getAirplanes().front()->getStatus() == "requesting_takeoff" || level->getAirplanes().front()->getStatus() == "requesting_boarding") return;
 
     //cout << level->getAirplanes().front()->getStatus() << "\n";
 
-    if(level->getAirplanes().front()->getStatus() == "awaiting_boarding" || level->getAirplanes().front()->getStatus() == "awaiting_takeoff" )
+    if(level->getAirplanes().front()->getStatus() == "awaiting_boarding" || level->getAirplanes().front()->getStatus() == "awaiting_takeoff" ) {
         updateDisplay(); //Curr time += 1
+        //updateAirplanes();
+    }
 
+updateAirplanes();
 
+/*
     for(int i = 0; i < level->getAirplanes().size(); ++i) {
         level->getAirplanes()[i]->work(level, dispatcher, selectedAirstrip, level->getAirplanes()[i]->getX(), level->getAirplanes()[i]->getY());
     }
+
+    */
+    //updateAirplanes();
 }
 
 void Game::renderDisplay(string fontPath) {
@@ -208,6 +216,15 @@ void Game::renderDisplay(string fontPath) {
     //_s_dismissButton.setFillColor(sf::Color::Red);
     _s_dismissButton.setPosition(START_SHAPES_X + 150 , 880);
     _s_dismissButton.setScale({ 1,0.8 });
+
+    // airplanes to draw
+    militaryImage.loadFromFile("./assets/military.png");
+    airbusImage.loadFromFile("./assets/airbus.png");
+    cornImage.loadFromFile("./assets/corn.png");
+
+    militaryTexture.loadFromImage(militaryImage);
+    airbusTexture.loadFromImage(airbusImage);
+    cornTexture.loadFromImage(cornImage);
 
 }
 
@@ -339,4 +356,61 @@ void Game::drawAirplaneInfo() {
 void Game::setBackground(string url_bg){
 	bg_texture.loadFromFile(url_bg);
 	background.setTexture(bg_texture);
+}
+
+void Game::updateAirplanes() {
+
+    auto win = getWindow();
+
+    auto level = getLevel();
+    auto airplanes = level->getAirplanes();
+
+    if (airplaneSprites.size() != airplanes.size()) {
+        airplaneSprites.clear();
+        for (auto& airplane : airplanes) {
+            sf::Sprite plane;
+            string type = airplane->getType();
+
+            if (type == "military") {
+                plane.setTexture(militaryTexture);
+            } else if (type == "cargo") {
+                plane.setTexture(airbusTexture);
+            } else if (type == "civilian") {
+                plane.setTexture(cornTexture);
+            }
+
+            plane.scale(sf::Vector2f(0.5f, 0.5f));
+            plane.setPosition(airplane->getX(), airplane->getY());
+
+            airplaneSprites.push_back(plane);
+        }
+    }
+    /*
+    for (auto& airplane : airplanes) {
+        airplane->work(level, dispatcher, level->getAirstrips()[0], airplane->getX(), airplane->getY());
+        //cout << "huy" << endl;
+    }
+    */
+
+    for (auto& airplane : airplanes) {
+        airplane->work(level, dispatcher, level->getAirstrips()[0], airplane->getX(), airplane->getY());
+    }
+
+    for (int i = 0; i < airplaneSprites.size(); i++) {
+        airplaneSprites[i].setPosition(airplanes[i]->getX(), airplanes[i]->getY());
+    }
+
+    for (auto planeSprite : airplaneSprites) {
+        win->draw(planeSprite);
+    }
+
+    //cout << airplanes[0]->getX() << " " << airplanes[0]->getY() << endl;
+}
+
+void Game::drawAirplanes() {
+    auto win = getWindow();
+
+    for (auto planeSprite : airplaneSprites) {
+        win->draw(planeSprite);
+    }
 }

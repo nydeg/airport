@@ -34,6 +34,9 @@ public:
 	void setLevel(Level* new_level) { level = new_level; }
 	void setBackground(string url_bg);
 
+	void drawAirplanes();
+	void updateAirplanes();
+
 	//void event_handler(sf::Event* event);
 	//setters
 
@@ -98,6 +101,18 @@ private:
 	//Airplane info
 	sf::RectangleShape _s_airplaneInfo_;
 	sf::Text _t_airplaneInfo_;
+
+
+	// airplanes to draw
+	sf::Image militaryImage;
+	sf::Image airbusImage;
+	sf::Image cornImage;
+
+	sf::Texture cornTexture;
+	sf::Texture airbusTexture;
+	sf::Texture militaryTexture;
+
+	vector<sf::Sprite> airplaneSprites;
 
 	Display* display;
 	Dispatcher* dispatcher;

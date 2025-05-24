@@ -45,6 +45,8 @@ public:
 	LapCoordinate findNearestPoint(int x0, int y0, vector<LapCoordinate>& points);
 
 
+	void updatePos();
+
 	//access
 	Date getTimeOfAction() { return timeOfAction; }
 	int getBoardNumber() { return boardNumber; }
@@ -60,7 +62,9 @@ public:
 	int getX() { return this->x; }
 	int getY() { return this->y; }
 	int getCornenrInd() { return ind; }
+	string getType() { return type; }
 
+	sf::RectangleShape getTestShape(){return test;}
 
 
 	//setters
@@ -72,7 +76,9 @@ public:
 	void setMaxLaps(int num) { maxLaps = num; }
 	void setLengthOfAirstrip(int len) { lengthOfAirstrip = len; }
 	void setOneLipInMinute(int value) { oneLipInMinute = value; }
-
+	void setType(string type) { this->type = type; }
+	void setX(int x) { this->x = x; }
+	void setY(int y) { this->y = y; }
 
 
 private:
@@ -80,6 +86,8 @@ private:
 
 	int x;
 	int y;
+
+	string type;
 
 	string status;
 	Date timeOfAction;
@@ -99,6 +107,8 @@ private:
 	int lengthOfAirstrip;
 	int oneLipInMinute;
 
+
+	sf::RectangleShape test;
 
 
 };

@@ -25,6 +25,10 @@ Airplane::Airplane()
     x = 0;
     y = 0;
 
+    test.setScale(sf::Vector2f(100,100));
+    test.setFillColor(sf::Color::Red);
+    test.setPosition(0,0);
+
 	cout << "airplane was created\n";
 
 }
@@ -58,6 +62,7 @@ void Airplane::MoveInLap(Level *level) {
     vector<LapCoordinate> lapCoordinates = level->getLapCoordinates();
 
     MovingNewLap(lapCoordinates[this->getCornenrInd()].x, lapCoordinates[this->getCornenrInd()].y);
+    //cout << "point -- > "  <<this->getCornenrInd() << "\n";
 }
 
 void Airplane::MoveToAirstrip(Level *level, int airstripNumber) {
@@ -136,15 +141,19 @@ void Airplane::Moving(int x, int y, string new_status) {
 }
 
 void Airplane::MovingNewLap(int x, int y) {
-    if (this->getX() != x && this->getY() != y) {
+    if (this->getX() != x || this->getY() != y) {
         if (this->getX() > x) this->x--;
         else if (this->getX() < x) this->x++;
+        else {
+            if (this->getY() > y) this->y--;
+            else if (this->getY() < y) this->y++;
+        }
 
-        if (this->getY() > y) this->y--;
-        else if (this->getY() < y) this->y++;
     }else {
         ind = (ind+1)%4;
+        cout << "--> " << ind << "\t" << getX() << " " << getY() << "\n";
     }
+
 }
 
 void Airplane::BoardingStartPoint(int startX, int startY) {
