@@ -1,5 +1,5 @@
 #include "Game.h"
-#include <iostream>
+
 #include "Dispatcher.h"
 
 
@@ -87,6 +87,7 @@ void Game::event_handler(sf::Event* event) {
 
 
 void Game::updateGame() {
+
     //airstrips drawing
     /*
     for(int i = 0; i < level->getAirstrips().size(); ++i) {
@@ -104,10 +105,8 @@ void Game::updateGame() {
         }
     }
 
-    if (level->getAirplanes().front()->getStatus() == "requesting_takeoff" || level->getAirplanes().front()->getStatus() == "requesting_boarding") {
-        return;
-    }
 
+    if (level->getAirplanes().front()->getStatus() == "requesting_takeoff" || level->getAirplanes().front()->getStatus() == "requesting_boarding") return;
 
     //cout << level->getAirplanes().front()->getStatus() << "\n";
 
@@ -415,11 +414,29 @@ void Game::updateAirplanes() {
         airplaneSprites[i].setPosition(airplanes[i]->getX(), airplanes[i]->getY());
     }
 
+    this->checkCollisions(airplaneSprites, airplanes);
+
     for (auto planeSprite : airplaneSprites) {
         win->draw(planeSprite);
     }
 
     //cout << airplanes[0]->getX() << " " << airplanes[0]->getY() << endl;
+}
+
+void Game::checkCollisions(vector<sf::Sprite> airplaneSprites, vector<Airplane*> airplanes) {
+    for (int i = 0; i < airplaneSprites.size() - 1; i++) {
+        for (int j = i + 1; j < airplaneSprites.size() - 1; j++) {
+            if (airplanes[i]->getStatus() == "awaiting_boarding" && airplanes[j]->getStatus() == "awaiting_boarding") {
+                continue;
+            }
+            if (airplaneSprites[i].getGlobalBounds().intersects(airplaneSprites[j].getGlobalBounds())) {
+                cout << airplanes[i]->getStatus() << " " << airplanes[j]->getStatus() << endl;
+                cout << i << " " << j << endl;
+                cout << "pizda samoletam" << endl;
+                return;
+            }
+        }
+    }
 }
 
 void Game::drawAirplanes() {

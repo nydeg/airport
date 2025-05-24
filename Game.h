@@ -36,6 +36,7 @@ public:
 
 	void drawAirplanes();
 	void updateAirplanes();
+	void checkCollisions(vector<sf::Sprite> airplaneSprites, vector<Airplane*> airplanes);
 
 	//void event_handler(sf::Event* event);
 	//setters
