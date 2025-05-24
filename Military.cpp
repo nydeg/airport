@@ -28,11 +28,8 @@ Military::Military(int boardNumber, string stata, Date date, int maxLaps)
 
 
 void Military::work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, int x, int y) {
-	if (this->getStatus() == "moving_to_request") {
-		this->MovingToRequest(x, y);
-	}
-	else if (this->getStatus() == "moving_new_lap") {
-		this->MovingNewLap(x, y);
+	if (this->getStatus() == "awaiting_boarding") {
+		this->MoveInLap(level);
 	}
 	else if (this->getStatus() == "boarding_startPoint") {
 		this->BoardingStartPoint(airstrip->getStart().first, airstrip->getStart().second);

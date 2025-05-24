@@ -26,7 +26,7 @@ public:
 	virtual void work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, int x, int y) = 0;
 
 	// functions for work
-	void MovingToRequest(int x, int y);
+	void Moving(int x, int y, string new_status);
 	void MovingNewLap(int x, int y);
 	void BoardingStartPoint(int startX, int startY);
 	void BoardingEndPoint(Level *level, Dispatcher *dispatcher, int endX, int endY);
@@ -55,6 +55,7 @@ public:
 	int getOneLipInMinute() { return oneLipInMinute; }
 	int getX() { return this->x; }
 	int getY() { return this->y; }
+	int getCornenrInd() { return ind; }
 
 	//setters
 	void setTimeOfAction(Date date) { timeOfAction = date; }
@@ -75,6 +76,8 @@ private:
 	string status;
 	Date timeOfAction;
 	int maxLaps;
+
+	int ind = 0;
 
 	//Date takeOffTime;
 	//Date boardingTime;

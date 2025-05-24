@@ -52,29 +52,9 @@ LapCoordinate Airplane::findNearestPoint(int x0, int y0, vector<LapCoordinate>& 
 }
 
 void Airplane::MoveInLap(Level *level) {
-    vector<LapCoordinate> path;
     vector<LapCoordinate> lapCoordinates = level->getLapCoordinates();
-    LapCoordinate startLapPoint = findNearestPoint(this->x, this->y, lapCoordinates);
-    // nearest lap point from current place
-    path.push_back(startLapPoint);
-    if (startLapPoint.position == "upper-right") {
-        path.push_back(lapCoordinates[1]);
-        path.push_back(lapCoordinates[2]);
-        path.push_back(lapCoordinates[3]);
-    } else if (startLapPoint.position == "upper-left") {
-        path.push_back(lapCoordinates[2]);
-        path.push_back(lapCoordinates[3]);
-        path.push_back(lapCoordinates[0]);
-    } else if (startLapPoint.position == "lower-left") {
-        path.push_back(lapCoordinates[3]);
-        path.push_back(lapCoordinates[0]);
-        path.push_back(lapCoordinates[1]);
-    } else if (startLapPoint.position == "lower-right") {
-        path.push_back(lapCoordinates[0]);
-        path.push_back(lapCoordinates[1]);
-        path.push_back(lapCoordinates[2]);
-    }
-    // draw a path here
+
+    MovingNewLap(lapCoordinates[this->getCornenrInd()].x, lapCoordinates[this->getCornenrInd()].y);
 }
 
 void Airplane::MoveToAirstrip(Level *level, int airstripNumber) {
@@ -135,36 +115,42 @@ void Airplane::DeleteAirplane(Level *level) {
     delete this;
 }
 
-void Airplane::MovingToRequest(int x, int y) {
-    if (this->getX() != x || this->getY() != y) {
-        // change coordinates
+void Airplane::Moving(int x, int y, string new_status) {
+    if (this->getX() != x && this->getY() != y) {
+        
+        if (this->getX() > x) this->x--;
+        else if (this->getX() < x) this->x++;
+
+        if (this->getY() > y) this->y--;
+        else if (this->getY() < y) this->y++;
+
+
     } else {
         // send to the queue
-        this->setStatus("board_waiting");
+        this->setStatus(new_status);
     }
 }
 
 void Airplane::MovingNewLap(int x, int y) {
-    if (this->getX() != x || this->getY() != y) {
-        // change coordinates
-    } else {
-        this->setStatus("moving_to_request");
+    if (this->getX() != x && this->getY() != y) {
+        if (this->getX() > x) this->x--;
+        else if (this->getX() < x) this->x++;
+
+        if (this->getY() > y) this->y--;
+        else if (this->getY() < y) this->y++;
+    }else {
+        ind = (ind+1)%4;
     }
 }
 
 void Airplane::BoardingStartPoint(int startX, int startY) {
-    if (this->getX() != startX || this->getY() != startY) {
-        // change coordinates
-    } else {
-        this->setStatus("boarding_endPoint");
-    }
+    Moving(startX, startY, "boarding_endPoint");
 }
 
 void Airplane::BoardingEndPoint(Level *level, Dispatcher *dispatcher, int endX, int endY) {
-    if (this->getX() != endX || this->getY() != endY) {
-        // change coordinates
+    if (this->getX() != endX && this->getY() != endY) {
+        Moving(endX, endY, "landed");
     } else {
-        this->setStatus("landed");
 
         // delete plane
         this->DeleteAirplane(level);
