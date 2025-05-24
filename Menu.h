@@ -27,6 +27,8 @@ public:
     sf::RectangleShape* getInputBox() { return &inputBox; }
     sf::Sprite getBackground(){ return background; }
 
+	sf::RectangleShape getExit(){return exit;}
+
     void renderInterface();
     void event_handler(sf::RenderWindow* window, sf::Event* event, Game* game);
 
@@ -42,5 +44,8 @@ private:
     
     sf::Texture startGame_texture;
     sf::RectangleShape button;
+
+	sf::Texture exitTexture;
+	sf::RectangleShape exit;
 };
 

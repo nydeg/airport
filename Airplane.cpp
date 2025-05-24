@@ -1,5 +1,4 @@
 #include "Airplane.h"
-
 #include <vector>
 #include <iostream>
 #include "Dispatcher.h"
@@ -33,12 +32,11 @@ Airplane::Airplane()
 
     ind = distrib(gen)%4;
 
-    ind = 0;
+    //ind = 1;
 
     switch(ind) {
         case(0): {
             x = 30;
-
             y = 870;
             break;
         }

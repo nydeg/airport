@@ -51,7 +51,7 @@ void Game::event_handler(sf::Event* event) {
             }
             //cout << 2 << endl;
             //Date prevTime = level->getAirplanes().front()->getTimeOfAction();
-            level->getAirplanes().front()->setTimeOfAction(level->getAirplanes().front()->getTimeOfAction() + 120);
+            level->getAirplanes().front()->setTimeOfAction(level->getAirplanes().front()->getTimeOfAction() + 2*60*24);
 
             flag_approve = 0;
         }
@@ -106,7 +106,10 @@ void Game::updateGame() {
     }
 
 
-    if (level->getAirplanes().front()->getStatus() == "requesting_takeoff" || level->getAirplanes().front()->getStatus() == "requesting_boarding") return;
+    if (level->getAirplanes().front()->getStatus() == "requesting_takeoff" || level->getAirplanes().front()->getStatus() == "requesting_boarding") {
+        updateAirplanes(0);
+        return;
+    };
 
     //cout << level->getAirplanes().front()->getStatus() << "\n";
 
@@ -402,6 +405,8 @@ void Game::updateAirplanes() {
         airplanes[i]->work(level, dispatcher, selectedAirstrip, airplanes[i]->getX(), airplanes[i]->getY());
 
 
+        if(airplanes[i]->getStatus() == "take_off" || airplanes[i]->getStatus() == "awaiting_takeoff")
+            airplaneSprites[i].setRotation(getDegrees()[3]);
         if(airplanes[i]->getStatus() == "boarding_endPoint") {
             airplaneSprites[i].setRotation(getDegrees()[1]);
         }
@@ -414,7 +419,7 @@ void Game::updateAirplanes() {
         airplaneSprites[i].setPosition(airplanes[i]->getX(), airplanes[i]->getY());
     }
 
-    this->checkCollisions(airplaneSprites, airplanes);
+    //this->checkCollisions(airplaneSprites, airplanes);
 
     for (auto planeSprite : airplaneSprites) {
         win->draw(planeSprite);
@@ -445,4 +450,35 @@ void Game::drawAirplanes() {
     for (auto planeSprite : airplaneSprites) {
         win->draw(planeSprite);
     }
+}
+
+void Game::updateAirplanes(int index) {
+    auto win = getWindow();
+
+    auto level = getLevel();
+    auto airplanes = level->getAirplanes();
+
+    if (airplaneSprites.empty()) {
+        for (auto& airplane : airplanes) {
+            sf::Sprite plane;
+            string type = airplane->getType();
+
+            if (type == "military") {
+                plane.setTexture(militaryTexture);
+            } else if (type == "cargo") {
+                plane.setTexture(airbusTexture);
+            } else if (type == "civilian") {
+                plane.setTexture(cornTexture);
+            }
+
+            plane.scale(sf::Vector2f(0.5f, 0.5f));
+            auto size = plane.getLocalBounds();
+            plane.setOrigin(size.left + size.width / 2, size.top + size.height / 2);
+            plane.setPosition(airplane->getX(), airplane->getY());
+
+            airplaneSprites.push_back(plane);
+        }
+    }
+
+    win->draw(airplaneSprites[index]);
 }

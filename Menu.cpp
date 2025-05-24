@@ -43,8 +43,14 @@ void Menu::renderInterface(){
 
     startGame_texture.loadFromFile("./assets/ENTER.png");
     button.setTexture(&startGame_texture);
-    button.setSize(sf::Vector2f(175, 96));
-    button.setPosition(75, 627);
+    button.setSize(sf::Vector2f(175, 75));
+    button.setPosition(75, 640);
+
+
+    exitTexture.loadFromFile("./assets/exit.png");
+    exit.setTexture(&exitTexture);
+    exit.setSize(sf::Vector2f(175, 75));
+    exit.setPosition(75, 815);
 
     //sf::Text buttonText("ENTER", font, 30);
     /*buttonText.setString(" START");
@@ -75,6 +81,10 @@ void Menu::event_handler(sf::RenderWindow* window, sf::Event* event, Game* game)
 
     if (event->type == sf::Event::MouseButtonReleased) {
         sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
+
+        if(exit.getGlobalBounds().contains(mousePos.x, mousePos.y))
+            window->close();
+
         if (button.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
             if (!playerName.empty()) {
 

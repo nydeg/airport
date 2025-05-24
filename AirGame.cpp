@@ -25,6 +25,7 @@ int main() {
         window.draw(*menu_game.getInputBox());
         window.draw(menu_game.getinputText());
         window.draw(menu_game.getButton());
+        window.draw(menu_game.getExit());
         window.display();
     }
 

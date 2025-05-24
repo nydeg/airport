@@ -21,6 +21,8 @@ public:
 
 	void updateGame();
 
+void updateAirplanes(int index);
+
 	void renderDisplay(string fontPath);
 	void updateScoreAndFine();
 	void updateSchedule();

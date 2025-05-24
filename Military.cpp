@@ -10,6 +10,15 @@ Military::Military(int boardNumber, string stata, Date date, int maxLaps)
 	setBoardNumber(boardNumber);
 	if (stata == "V") {
 		setStatus("awaiting_takeoff");
+		if(boardNumber/100 != 1) {
+			setX(1200);
+			setY(350);
+		}
+		else {
+			setX(1300);
+			setY(260);
+		}
+
 	}
 	else {
 		setStatus("awaiting_boarding");
@@ -44,6 +53,7 @@ void Military::work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, in
 		this->BoardingEndPoint(level, dispatcher, airstrip->getEnd().first, airstrip->getEnd().second);
 	}
 	else if (this->getStatus() == "take_off") {
-		this->TakeOff(level);
+		this->TakeOffEndPoint(level, dispatcher, 0, airstrip->getEnd().second);
 	}
+
 }
