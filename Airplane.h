@@ -57,6 +57,9 @@ public:
 	int getY() { return this->y; }
 	int getCornenrInd() { return ind; }
 
+	sf::RectangleShape __s_getTestShape__() {return test; }
+
+
 	//setters
 	void setTimeOfAction(Date date) { timeOfAction = date; }
 	void setBoardNumber(int bNum) { boardNumber = bNum; }
@@ -66,6 +69,7 @@ public:
 	void setMaxLaps(int num) { maxLaps = num; }
 	void setLengthOfAirstrip(int len) { lengthOfAirstrip = len; }
 	void setOneLipInMinute(int value) { oneLipInMinute = value; }
+
 
 private:
 	int deviation; // in minutes
@@ -91,6 +95,7 @@ private:
 	int lengthOfAirstrip;
 	int oneLipInMinute;
 
+	sf::RectangleShape test;
 
 
 };

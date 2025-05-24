@@ -27,6 +27,10 @@ Airplane::Airplane()
 
 	cout << "airplane was created\n";
 
+    test.setSize(sf::Vector2f(10,10));
+    test.setFillColor(sf::Color::Red);
+    test.setPosition(x,y);
+
 }
 
 
