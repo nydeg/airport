@@ -26,7 +26,7 @@ Airplane::Airplane()
     static std::mt19937 gen(rd()); // Генератор (Mersenne Twister)
     std::uniform_int_distribution<> distrib(0, 3); // Равномерное распределение
 
-ind = 1;
+    ind = 1;
     x = 30;
     y = 30;
 

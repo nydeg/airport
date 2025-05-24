@@ -9,6 +9,8 @@ Cargo::Cargo(int boardNumber, string stata, Date date, int maxLaps)
 	setBoardNumber(boardNumber);
 	if (stata == "V") {
 		setStatus("awaiting_takeoff");
+		setX(1400);
+		setY(300);
 	}
 	else {
 		setStatus("awaiting_boarding");
