@@ -26,6 +26,13 @@ Airplane::Airplane()
     static std::mt19937 gen(rd()); // Генератор (Mersenne Twister)
     std::uniform_int_distribution<> distrib(0, 3); // Равномерное распределение
 
+ind = 1;
+    x = 30;
+    y = 30;
+
+
+
+    /*
     ind = distrib(gen);
 
     switch(ind) {
@@ -46,7 +53,7 @@ Airplane::Airplane()
             y = 870;
         }
     };
-
+*/
     test.setScale(sf::Vector2f(100,100));
     test.setFillColor(sf::Color::Red);
     test.setPosition(0,0);
@@ -147,7 +154,7 @@ int Airplane::DeleteAirplane(Level *level) {
     }
 
     level->getAirplanes().erase(level->getAirplanes().begin() + airplaneIndex);
-    delete this;
+    //delete this;
 
     return airplaneIndex;
 }
@@ -172,7 +179,7 @@ void Airplane::Moving(int x, int y, string new_status) {
 
 int Airplane::MovingNewLap(int x, int y, int& status, Airstrip* airstrip) {
 
-    if(ind == 3) {
+    if(ind == 0) {
         if(getStatus() == "boarding_startPoint") {
             return 1;
         }
