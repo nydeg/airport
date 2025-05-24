@@ -103,9 +103,10 @@ void Game::updateGame() {
     }
 
 
-    if (level->getAirplanes().front()->getStatus() == "requesting_takeoff" || level->getAirplanes().front()->getStatus() == "requesting_boarding") return;
-
-    //cout << level->getAirplanes().front()->getStatus() << "\n";
+    if (level->getAirplanes().front()->getStatus() == "requesting_takeoff" || level->getAirplanes().front()->getStatus() == "requesting_boarding") {
+        updateAirplanes(0);
+        return;
+    }
 
     if(level->getAirplanes().front()->getStatus() == "awaiting_boarding" || level->getAirplanes().front()->getStatus() == "awaiting_takeoff" ) {
         updateDisplay(); //Curr time += 1
@@ -420,6 +421,37 @@ void Game::updateAirplanes() {
     //cout << airplanes[0]->getX() << " " << airplanes[0]->getY() << endl;
 }
 
+void Game::updateAirplanes(int index) {
+    auto win = getWindow();
+
+    auto level = getLevel();
+    auto airplanes = level->getAirplanes();
+
+    if (airplaneSprites.empty()) {
+        for (auto& airplane : airplanes) {
+            sf::Sprite plane;
+            string type = airplane->getType();
+
+            if (type == "military") {
+                plane.setTexture(militaryTexture);
+            } else if (type == "cargo") {
+                plane.setTexture(airbusTexture);
+            } else if (type == "civilian") {
+                plane.setTexture(cornTexture);
+            }
+
+            plane.scale(sf::Vector2f(0.5f, 0.5f));
+            auto size = plane.getLocalBounds();
+            plane.setOrigin(size.left + size.width / 2, size.top + size.height / 2);
+            plane.setPosition(airplane->getX(), airplane->getY());
+
+            airplaneSprites.push_back(plane);
+        }
+    }
+
+    win->draw(airplaneSprites[index]);
+}
+
 void Game::checkCollisions(vector<sf::Sprite> airplaneSprites, vector<Airplane*> airplanes) {
     for (int i = 0; i < airplaneSprites.size() - 1; i++) {
         for (int j = i + 1; j < airplaneSprites.size() - 1; j++) {
@@ -427,9 +459,11 @@ void Game::checkCollisions(vector<sf::Sprite> airplaneSprites, vector<Airplane*>
                 continue;
             }
             if (airplaneSprites[i].getGlobalBounds().intersects(airplaneSprites[j].getGlobalBounds())) {
-                cout << airplanes[i]->getStatus() << " " << airplanes[j]->getStatus() << endl;
-                cout << i << " " << j << endl;
-                cout << "pizda samoletam" << endl;
+                // cout << airplanes[i]->getStatus() << " " << airplanes[j]->getStatus() << endl;
+                // cout << i << " " << j << endl;
+                // cout << "pizda samoletam" << endl;
+
+                // there need to write a logic for planes boomboom
                 return;
             }
         }
