@@ -5,7 +5,7 @@
 #include "Dispatcher.h"
 #include "Level.h"
 #include <cmath>
-
+#include <random>
 #include "Airstrip.h"
 
 
@@ -22,12 +22,35 @@ Airplane::Airplane()
 	Date currDate;
 	timeOfAction = currDate;
 
-    x = 0;
-    y = 0;
+    static std::random_device rd;  // Источник энтропии
+    static std::mt19937 gen(rd()); // Генератор (Mersenne Twister)
+    std::uniform_int_distribution<> distrib(0, 3); // Равномерное распределение
+
+    ind = distrib(gen);
+
+    switch(ind) {
+        case(0): {
+            x = 30;
+            y = 30;
+        }
+        case(1): {
+            x = 1480;
+            y = 30;
+        }
+        case(2): {
+            x = 1480;
+            y = 870;
+        }
+        case(3): {
+            x = 30;
+            y = 870;
+        }
+    };
 
     test.setScale(sf::Vector2f(100,100));
     test.setFillColor(sf::Color::Red);
     test.setPosition(0,0);
+
 
 	cout << "airplane was created\n";
 
@@ -58,10 +81,14 @@ LapCoordinate Airplane::findNearestPoint(int x0, int y0, vector<LapCoordinate>& 
     return res;
 }
 
-void Airplane::MoveInLap(Level *level) {
-    vector<LapCoordinate> lapCoordinates = level->getLapCoordinates();
+int Airplane::MoveInLap(Level *level,  int& status, Airstrip* airstrip) {
+        vector<LapCoordinate> lapCoordinates = level->getLapCoordinates();
 
-    MovingNewLap(lapCoordinates[this->getCornenrInd()].x, lapCoordinates[this->getCornenrInd()].y);
+        if(MovingNewLap(lapCoordinates[this->getCornenrInd()].x, lapCoordinates[this->getCornenrInd()].y, status, airstrip)) {
+            return 1;
+        }
+        return 0;
+
     //cout << "point -- > "  <<this->getCornenrInd() << "\n";
 }
 
@@ -125,22 +152,31 @@ void Airplane::DeleteAirplane(Level *level) {
 }
 
 void Airplane::Moving(int x, int y, string new_status) {
-    if (this->getX() != x && this->getY() != y) {
-        
+    //cout << "MOOVING!!!" << "\n";
+    if (this->getX() != x || this->getY() != y) {
+        cout << x << " " << y << "\n";
         if (this->getX() > x) this->x--;
         else if (this->getX() < x) this->x++;
-
-        if (this->getY() > y) this->y--;
-        else if (this->getY() < y) this->y++;
-
-
+        else {
+            if (this->getY() > y) this->y--;
+            else if (this->getY() < y) this->y++;
+        }
+        cout << "--> " << getX() << " " << getY() << "\n";
     } else {
+
         // send to the queue
         this->setStatus(new_status);
     }
 }
 
-void Airplane::MovingNewLap(int x, int y) {
+int Airplane::MovingNewLap(int x, int y, int& status, Airstrip* airstrip) {
+
+    if(ind == 3) {
+        if(getStatus() == "boarding_startPoint") {
+            return 1;
+        }
+    }
+
     if (this->getX() != x || this->getY() != y) {
         if (this->getX() > x) this->x--;
         else if (this->getX() < x) this->x++;
@@ -150,9 +186,13 @@ void Airplane::MovingNewLap(int x, int y) {
         }
 
     }else {
-        ind = (ind+1)%4;
-        cout << "--> " << ind << "\t" << getX() << " " << getY() << "\n";
+
+
+            ind = (ind+1)%4;
+            return 0;
+            //cout << "--> " << ind << "\t" << getX() << " " << getY() << "\n";
     }
+    return 0;
 
 }
 
@@ -161,7 +201,7 @@ void Airplane::BoardingStartPoint(int startX, int startY) {
 }
 
 void Airplane::BoardingEndPoint(Level *level, Dispatcher *dispatcher, int endX, int endY) {
-    if (this->getX() != endX && this->getY() != endY) {
+    if (this->getX() != endX || this->getY() != endY) {
         Moving(endX, endY, "landed");
     } else {
 

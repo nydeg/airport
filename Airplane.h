@@ -30,14 +30,14 @@ public:
 
 	// functions for work
 	void Moving(int x, int y, string new_status);
-	void MovingNewLap(int x, int y);
+	int MovingNewLap(int x, int y,  int& status, Airstrip* airstrip);
 	void BoardingStartPoint(int startX, int startY);
 	void BoardingEndPoint(Level *level, Dispatcher *dispatcher, int endX, int endY);
 	void TakeOffStartPoint(int startX, int startY);
 	void TakeOffEndPoint(Level* level, Dispatcher* dispatcher, int endX, int endY);
 
 	void DeleteAirplane(Level *level);
-	void MoveInLap(Level *level);
+	int MoveInLap(Level *level, int& status, Airstrip* airstrip);
 	void MoveToAirstrip(Level *level, int airstripNumber);
 	void MoveToTakeoff(Level *level, int airstripNumber);
 	void MoveFromHangarToAirstrip(Level *level, int airstripNumber);

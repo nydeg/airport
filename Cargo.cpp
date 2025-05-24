@@ -27,11 +27,17 @@ Cargo::Cargo(int boardNumber, string stata, Date date, int maxLaps)
 
 
 void Cargo::work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, int x, int y) {
+	int poo = 2;
 	if (this->getStatus() == "awaiting_boarding") {
-		this->MoveInLap(level);
+		this->MoveInLap(level, poo, airstrip);
 	}
 	else if (this->getStatus() == "boarding_startPoint") {
-		this->BoardingStartPoint(airstrip->getStart().first, airstrip->getStart().second);
+	int status = 0;
+		if(MoveInLap(level, status, airstrip)) {
+			cout << "BOARDING!!!\n";
+			BoardingStartPoint(airstrip->getStart().first, airstrip->getStart().second);
+		}
+		//this->MoveInLap(level, 1, airstrip);
 	}
 	else if (this->getStatus() == "boarding_endPoint") {
 		this->BoardingEndPoint(level, dispatcher, airstrip->getEnd().first, airstrip->getEnd().second);

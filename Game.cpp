@@ -393,7 +393,7 @@ void Game::updateAirplanes() {
     */
 
     for (auto& airplane : airplanes) {
-        airplane->work(level, dispatcher, level->getAirstrips()[0], airplane->getX(), airplane->getY());
+        airplane->work(level, dispatcher, selectedAirstrip, airplane->getX(), airplane->getY());
     }
 
     for (int i = 0; i < airplaneSprites.size(); i++) {
