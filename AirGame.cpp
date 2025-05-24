@@ -38,12 +38,17 @@ int main() {
 
     game.renderDisplay("./assets/ofont.ru_Menlo.ttf");
 
+    int i = 0;
     while (game.getWindow()->isOpen()) {
         sf::Event event;
         game.getWindow()->clear();
         game.getWindow()->draw(game.getBackground());
-        game.updateGame();
 
+        if(i % 29 == 0) {
+            game.updateGame();
+            i = 0;
+        }
+        ++i;
         while (game.getWindow()->pollEvent(event)) {
             game.event_handler(&event);
             game.updateSchedule();

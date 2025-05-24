@@ -145,6 +145,9 @@ bool CompareByDate(Airplane* ft, Airplane* sd)
 {
 	if (ft->getTimeOfAction() > sd->getTimeOfAction())
 		return false;
+	if (ft->getTimeOfAction() == sd->getTimeOfAction())
+		if(ft->getBoardNumber() > sd->getBoardNumber())
+			return false;
 	return true;
 }
 

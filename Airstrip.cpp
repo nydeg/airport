@@ -17,7 +17,7 @@ Airstrip::Airstrip(pair<int, int> st, pair<int, int> ed)
 	cout << "airstrip was created with parameters\n";
 
 	area.setSize(sf::Vector2f(length, 100));
-	area.setFillColor(sf::Color::White);
+	area.setFillColor(sf::Color::Transparent);
 	area.setPosition(st.first, st.second);
 
 }

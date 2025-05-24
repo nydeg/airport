@@ -28,11 +28,17 @@ void Game::event_handler(sf::Event* event) {
             // pressed denied button
 
             if(level->getAirplanes().front()->getStatus() == "requesting_boarding") {
-                if(level->getAirplanes().front()->getMaxLaps() != 0)
+                if(level->getAirplanes().front()->getMaxLaps() != 0) {
                     level->getAirplanes().front()->setMaxLaps(level->getAirplanes().front()->getMaxLaps() - 1); // уменьшаем кол-во кругов!!!
+                }
                 else {
                     cout << "\n\nYOU LOOSE!!!!!!\n\n";
                 }
+                level->getAirplanes().front()->setStatus("awaiting_boarding");
+            }
+            if(level->getAirplanes().front()->getStatus() == "requesting_takeoff") {
+                level->getAirplanes().front()->setStatus("awaiting_takeoff");
+
             }
             //Date prevTime = level->getAirplanes().front()->getTimeOfAction();
             level->getAirplanes().front()->setTimeOfAction(level->getAirplanes().front()->getTimeOfAction() + 120);
@@ -69,18 +75,22 @@ void Game::updateGame() {
     }
 
 
-    if(display->d_getCurrTime() == level->getAirplanes().front()->getTimeOfAction()) {
-        if(level->getAirplanes().front()->getStatus() == "awaiting_boarding")
-            level->getAirplanes().front()->setStatus("requesting_boarding");
-        if(level->getAirplanes().front()->getStatus() == "awaiting_takeoff")
-            level->getAirplanes().front()->setStatus("requesting_takeoff");
+    for(int i = 0; i < level->getAirplanes().size(); ++i) {
+        if(display->d_getCurrTime() == level->getAirplanes()[i]->getTimeOfAction()) {
+            if(level->getAirplanes()[i]->getStatus() == "awaiting_boarding")
+                level->getAirplanes()[i]->setStatus("requesting_boarding");
+            if(level->getAirplanes()[i]->getStatus() == "awaiting_takeoff")
+                level->getAirplanes()[i]->setStatus("requesting_takeoff");
+        }
     }
 
 
     if (level->getAirplanes().front()->getStatus() == "requesting_takeoff" || level->getAirplanes().front()->getStatus() == "requesting_boarding") return;
-    updateDisplay();
 
+    //cout << level->getAirplanes().front()->getStatus() << "\n";
 
+    if(level->getAirplanes().front()->getStatus() == "awaiting_boarding" || level->getAirplanes().front()->getStatus() == "awaiting_takeoff" )
+        updateDisplay(); //Curr time += 1
 
 
     for(int i = 0; i < level->getAirplanes().size(); ++i) {
@@ -267,9 +277,28 @@ void Game::drawDisplay() {
     }
     //airplaneInfo
     getWindow()->draw(__s_getAirplaneInfo__());
+    if(display->d_getCurrTime() == level->getAirplanes().front()->getTimeOfAction()) {
+        drawAirplaneInfo();
+    }
     //buttons
     getWindow()->draw(__s_getApproveButton__());
     getWindow()->draw(__s_getDismissButton__());
+}
+
+void Game::drawAirplaneInfo() {
+
+    if(level->getAirplanes().front()->getStatus() == "requesting_takeoff")
+        _t_airplaneInfo_.setString("Flight " + to_string(level->getAirplanes().front()->getBoardNumber()) + "\nrequests permission to \ntakeoff");
+    if(level->getAirplanes().front()->getStatus() == "requesting_boarding")
+        _t_airplaneInfo_.setString("Flight " + to_string(level->getAirplanes().front()->getBoardNumber()) + " \nrequests permission to \nboarding" + "\nAdditional laps: " + to_string(level->getAirplanes().front()->getMaxLaps()));
+    _t_airplaneInfo_.setFont(font);
+    _t_airplaneInfo_.setCharacterSize(DISPLAYS_CHARACTER_SIZE + 3 );
+    _t_airplaneInfo_.setFillColor(sf::Color::Black);
+    _t_airplaneInfo_.setPosition(START_TEXTS_X, START_TEXTS_Y + 560);
+
+    getWindow()->draw(_t_airplaneInfo_);
+
+
 }
 
 void Game::setBackground(string url_bg){

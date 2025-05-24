@@ -27,6 +27,7 @@ public:
 	void updateDisplay();
 
 	void drawDisplay();
+	void drawAirplaneInfo();
 
 	void setWindow(sf::RenderWindow* new_window) { window = new_window; }
 	void setLevel(Level* new_level) { level = new_level; }
@@ -60,6 +61,9 @@ public:
 	sf::RectangleShape __s_getDismissButton__() {return _s_dismissButton;}
 
 	sf::RectangleShape __s_getAirplaneInfo__() {return _s_airplaneInfo_; }
+	sf::Text __t_getAirplaneInfo() {return _t_airplaneInfo_; }
+
+
 private:
 	sf::RenderWindow* window;
 	sf::Texture bg_texture;
@@ -90,6 +94,7 @@ private:
 
 	//Airplane info
 	sf::RectangleShape _s_airplaneInfo_;
+	sf::Text _t_airplaneInfo_;
 
 	Display* display;
 	Dispatcher* dispatcher;
