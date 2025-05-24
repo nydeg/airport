@@ -140,44 +140,44 @@ void Game::renderDisplay(string fontPath) {
 
     //create currTimePart
     _s_currTime_.setSize(sf::Vector2f(300, 100));
-    _s_currTime_.setFillColor(sf::Color::Black);
+    _s_currTime_.setFillColor(sf::Color::White);
     _s_currTime_.setPosition(START_SHAPES_X, START_SHAPES_Y);
 
     _t_currTime_.setString("Curr time: " + display->d_getCurrTime().getStringDate());
     _t_currTime_.setFont(font);
     _t_currTime_.setCharacterSize(DISPLAYS_CHARACTER_SIZE);
-    _t_currTime_.setFillColor(sf::Color::White);
+    _t_currTime_.setFillColor(sf::Color::Red);
     _t_currTime_.setPosition(START_TEXTS_X, START_TEXTS_Y);
 
     //create Score/Fine part
 
     _s_ScoreAndFine_.setSize(sf::Vector2f(300, 100));
-    _s_ScoreAndFine_.setFillColor(sf::Color::Yellow);
+    _s_ScoreAndFine_.setFillColor(sf::Color::Blue);
     _s_ScoreAndFine_.setPosition(START_SHAPES_X, START_SHAPES_Y+100);
 
     _t_score_.setString("SCORE: " + dispatcher->getCurrentScore());
     _t_score_.setFont(font);
-    _t_score_.setCharacterSize(DISPLAYS_CHARACTER_SIZE);
-    _t_score_.setFillColor(sf::Color::Black);
+    _t_score_.setCharacterSize(DISPLAYS_CHARACTER_SIZE + 2);
+    _t_score_.setFillColor(sf::Color::Green);
     _t_score_.setPosition(START_TEXTS_X, START_TEXTS_Y+100);
 
     _t_fine_.setString("FINE: " + dispatcher->getFine());
     _t_fine_.setFont(font);
-    _t_fine_.setCharacterSize(DISPLAYS_CHARACTER_SIZE);
-    _t_fine_.setFillColor(sf::Color::Black);
+    _t_fine_.setCharacterSize(DISPLAYS_CHARACTER_SIZE + 2);
+    _t_fine_.setFillColor(sf::Color::Green);
     _t_fine_.setPosition(START_TEXTS_X + 170, START_TEXTS_Y+100);
 
     //create TimeTable Title
 
     _s_titleOfTimeTable_.setSize(sf::Vector2f(300, 100));
-    _s_titleOfTimeTable_.setFillColor(sf::Color::White);
+    _s_titleOfTimeTable_.setFillColor(sf::Color::Red);
     _s_titleOfTimeTable_.setPosition(START_SHAPES_X, START_SHAPES_Y+200);
 
-    _t_titleOfTimeTable_.setString("Time Table");
+    _t_titleOfTimeTable_.setString("TimeTable:");
     _t_titleOfTimeTable_.setFont(font);
-    _t_titleOfTimeTable_.setCharacterSize(DISPLAYS_CHARACTER_SIZE + 8);
+    _t_titleOfTimeTable_.setCharacterSize(DISPLAYS_CHARACTER_SIZE + 20);
     _t_titleOfTimeTable_.setFillColor(sf::Color::Black);
-    _t_titleOfTimeTable_.setPosition(START_TEXTS_X + 70, START_TEXTS_Y + 200);
+    _t_titleOfTimeTable_.setPosition(START_TEXTS_X + 30, START_TEXTS_Y + 200);
 
     //create time Table
     for(int i = 0; i < level->getAirplanes().size(); ++i) {
@@ -206,7 +206,7 @@ void Game::renderDisplay(string fontPath) {
 
     //create airplane info
     _s_airplaneInfo_.setSize(sf::Vector2f(300, 350));
-    _s_airplaneInfo_.setFillColor(sf::Color::White);
+    _s_airplaneInfo_.setFillColor(sf::Color::Cyan);
     _s_airplaneInfo_.setPosition(START_SHAPES_X, START_SHAPES_Y + 550);
 
     //create buttons
@@ -237,19 +237,19 @@ void Game::renderDisplay(string fontPath) {
 
 void Game::updateScoreAndFine() {
     _s_ScoreAndFine_.setSize(sf::Vector2f(300, 100));
-    _s_ScoreAndFine_.setFillColor(sf::Color::Yellow);
+    _s_ScoreAndFine_.setFillColor(sf::Color::Blue);
     _s_ScoreAndFine_.setPosition(START_SHAPES_X, START_SHAPES_Y+100);
 
     _t_score_.setString("SCORE: " + to_string(dispatcher->getCurrentScore()));
     _t_score_.setFont(font);
-    _t_score_.setCharacterSize(DISPLAYS_CHARACTER_SIZE);
-    _t_score_.setFillColor(sf::Color::Black);
+    _t_score_.setCharacterSize(DISPLAYS_CHARACTER_SIZE + 2);
+    _t_score_.setFillColor(sf::Color::Green);
     _t_score_.setPosition(START_TEXTS_X, START_TEXTS_Y+100);
 
     _t_fine_.setString("FINE: " + to_string(dispatcher->getFine()));
     _t_fine_.setFont(font);
-    _t_fine_.setCharacterSize(DISPLAYS_CHARACTER_SIZE);
-    _t_fine_.setFillColor(sf::Color::Black);
+    _t_fine_.setCharacterSize(DISPLAYS_CHARACTER_SIZE + 2);
+    _t_fine_.setFillColor(sf::Color::Green);
     _t_fine_.setPosition(START_TEXTS_X + 170, START_TEXTS_Y+100);
 }
 
@@ -301,7 +301,7 @@ void Game::updateDisplay() {
     _t_currTime_.setString("Curr time: " + display->d_getCurrTime().getStringDate());
     _t_currTime_.setFont(font);
     _t_currTime_.setCharacterSize(DISPLAYS_CHARACTER_SIZE);
-    _t_currTime_.setFillColor(sf::Color::White);
+    _t_currTime_.setFillColor(sf::Color::Red);
     _t_currTime_.setPosition(START_TEXTS_X, START_TEXTS_Y);
 
     //this->updateSchedule();
@@ -347,13 +347,13 @@ void Game::drawDisplay() {
 void Game::drawAirplaneInfo() {
 
     if(level->getAirplanes().front()->getStatus() == "requesting_takeoff")
-        _t_airplaneInfo_.setString("Flight " + to_string(level->getAirplanes().front()->getBoardNumber()) + "\nrequests permission to \ntakeoff");
+        _t_airplaneInfo_.setString("Airplane Info:\n\nFlight " + to_string(level->getAirplanes().front()->getBoardNumber()) + "\nrequests permission to \ntakeoff.");
     if(level->getAirplanes().front()->getStatus() == "requesting_boarding")
-        _t_airplaneInfo_.setString("Flight " + to_string(level->getAirplanes().front()->getBoardNumber()) + " \nrequests permission to \nboarding" + "\nAdditional laps: " + to_string(level->getAirplanes().front()->getMaxLaps()));
+        _t_airplaneInfo_.setString("Airplane Info:\n\nFlight " + to_string(level->getAirplanes().front()->getBoardNumber()) + "\nrequests permission to \nboarding." + "\nAdditional laps: " + to_string(level->getAirplanes().front()->getMaxLaps()));
     _t_airplaneInfo_.setFont(font);
-    _t_airplaneInfo_.setCharacterSize(DISPLAYS_CHARACTER_SIZE + 3 );
+    _t_airplaneInfo_.setCharacterSize(DISPLAYS_CHARACTER_SIZE + 5 );
     _t_airplaneInfo_.setFillColor(sf::Color::Black);
-    _t_airplaneInfo_.setPosition(START_TEXTS_X, START_TEXTS_Y + 560);
+    _t_airplaneInfo_.setPosition(START_TEXTS_X-5, START_TEXTS_Y + 590);
 
     getWindow()->draw(_t_airplaneInfo_);
 

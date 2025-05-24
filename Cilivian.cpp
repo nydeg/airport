@@ -41,7 +41,7 @@ void Civilian::work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, in
 	else if (this->getStatus() == "boarding_startPoint") {
 		int status = 0;
 		if(MoveInLap(level, status, airstrip)) {
-			cout << "BOARDING!!!\n";
+			//cout << "BOARDING!!!\n";
 			BoardingStartPoint(airstrip->getStart().first, airstrip->getStart().second);
 		}
 		//this->MoveInLap(level, 1, airstrip);

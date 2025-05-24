@@ -165,14 +165,14 @@ int Airplane::DeleteAirplane(Level *level) {
 void Airplane::Moving(int x, int y, string new_status) {
     //cout << "MOOVING!!!" << "\n";
     if (this->getX() != x || this->getY() != y) {
-        cout << x << " " << y << "\n";
+        //cout << x << " " << y << "\n";
         if (this->getX() > x) this->x--;
         else if (this->getX() < x) this->x++;
         else {
             if (this->getY() > y) this->y--;
             else if (this->getY() < y) this->y++;
         }
-        cout << "--> " << getX() << " " << getY() << "\n";
+        //cout << "--> " << getX() << " " << getY() << "\n";
     } else {
 
         // send to the queue

@@ -42,7 +42,7 @@ void Cargo::work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, int x
 	else if (this->getStatus() == "boarding_startPoint") {
 	int status = 0;
 		if(MoveInLap(level, status, airstrip)) {
-			cout << "BOARDING!!!\n";
+			//cout << "BOARDING!!!\n";
 			BoardingStartPoint(airstrip->getStart().first, airstrip->getStart().second);
 		}
 		//this->MoveInLap(level, 1, airstrip);
