@@ -30,7 +30,7 @@ void Cargo::work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, int x
 	if (this->getStatus() == "moving_to_request") {
 		this->MovingToRequest(x, y);
 	}
-	else if (this->getStatus() == "moving_new_lap") {
+	else if (this->getStatus() == "awaiting_boarding") {
 		this->MovingNewLap(x, y);
 	}
 	else if (this->getStatus() == "boarding_startPoint") {

@@ -88,6 +88,8 @@ private:
 	int lengthOfAirstrip;
 	int oneLipInMinute;
 
+
+
 };
 
 #endif AIRPLAHE_H

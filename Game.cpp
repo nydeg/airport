@@ -24,12 +24,12 @@ void Game::event_handler(sf::Event* event) {
             flag_approve = 1;
         }
         else if (_s_dismissButton.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
-            cout << "I DON'\T KNOW" << endl;
+            cout << "I DON'\t KNOW" << endl;
             // pressed denied button
 
             if(level->getAirplanes().front()->getStatus() == "requesting_boarding") {
                 if(level->getAirplanes().front()->getMaxLaps() != 0) {
-                    level->getAirplanes().front()->setMaxLaps(level->getAirplanes().front()->getMaxLaps() - 1); // уменьшаем кол-во кругов!!!
+                    level->getAirplanes().front()->setMaxLaps(level->getAirplanes().front()->getMaxLaps() - 1); // муменьшаем кол-во кругов!!!
                 }
                 else {
                     cout << "\n\nYOU LOOSE!!!!!!\n\n";
@@ -51,7 +51,7 @@ void Game::event_handler(sf::Event* event) {
         for(int i = 0; i < level->getAirstrips().size(); ++i) {
             if(level->getAirstrips()[i]->__s_getAirstripShape__().getGlobalBounds().contains(mousePos.x, mousePos.y) && flag_approve) {
                 if (level->getAirplanes().front()->getStatus() == "requesting_boarding") {
-                    level->getAirplanes().front()->setStatus("boarding");
+                    level->getAirplanes().front()->setStatus("boarding_startPoint");
                     selectedAirstrip = level->getAirstrips()[i];
                     flag_approve = 0;
                 }

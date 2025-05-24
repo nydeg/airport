@@ -54,8 +54,6 @@ int main() {
             game.updateSchedule();
         }
 
-        //update game
-
         //update Display
         game.drawDisplay();
 
