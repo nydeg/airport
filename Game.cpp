@@ -16,9 +16,8 @@ void Game::event_handler(sf::Event* event) {
     if (event->type == sf::Event::MouseButtonReleased && (level->getAirplanes().front()->getStatus() == "requesting_boarding" || level->getAirplanes().front()->getStatus() == "requesting_takeoff")) {
         sf::Vector2i mousePos = sf::Mouse::getPosition(*window);
 
-        cout << 1 << "\n";
+        //cout << 1 << "\n";
         // pressed approve button
-
 
         if (_s_approveButton.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
             cout << "APPROVE" << endl;
@@ -27,8 +26,17 @@ void Game::event_handler(sf::Event* event) {
         else if (_s_dismissButton.getGlobalBounds().contains(mousePos.x, mousePos.y)) {
             cout << "I DON'\T KNOW" << endl;
             // pressed denied button
-            Date prevTime = level->getAirplanes().front()->getTimeOfAction();
+
+            if(level->getAirplanes().front()->getStatus() == "requesting_boarding") {
+                if(level->getAirplanes().front()->getMaxLaps() != 0)
+                    level->getAirplanes().front()->setMaxLaps(level->getAirplanes().front()->getMaxLaps() - 1); // уменьшаем кол-во кругов!!!
+                else {
+                    cout << "\n\nYOU LOOSE!!!!!!\n\n";
+                }
+            }
+            //Date prevTime = level->getAirplanes().front()->getTimeOfAction();
             level->getAirplanes().front()->setTimeOfAction(level->getAirplanes().front()->getTimeOfAction() + 120);
+
             flag_approve = 0;
         }
 
@@ -39,10 +47,12 @@ void Game::event_handler(sf::Event* event) {
                 if (level->getAirplanes().front()->getStatus() == "requesting_boarding") {
                     level->getAirplanes().front()->setStatus("boarding");
                     selectedAirstrip = level->getAirstrips()[i];
+                    flag_approve = 0;
                 }
                 else if (level->getAirplanes().front()->getStatus() == "requesting_takeoff") {
                     level->getAirplanes().front()->setStatus("take_off");
                     selectedAirstrip = level->getAirstrips()[i];
+                    flag_approve = 0;
                 }
             }
         }
@@ -171,6 +181,10 @@ void Game::renderDisplay(string fontPath) {
 }
 
 void Game::updateScoreAndFine() {
+
+}
+
+void Game::updateSchedule() {
     //create time Table
 
     for(int i = 0; i < _s_timeTable_.size(); ++i) {
@@ -183,6 +197,8 @@ void Game::updateScoreAndFine() {
     }
     _t_timeTable_.clear();
 
+    level->scheduleSort();
+
     for(int i = 0; i < level->getAirplanes().size(); ++i) {
         //shapes
         sf::RectangleShape* newShape = new sf::RectangleShape;
@@ -193,9 +209,9 @@ void Game::updateScoreAndFine() {
 
         //texts
         string type;
-        if(level->getAirplanes()[i]->getStatus() == "awaiting_takeoff")
+        if(level->getAirplanes()[i]->getStatus() == "awaiting_takeoff" || level->getAirplanes()[i]->getStatus() == "requesting_takeoff")
             type = "V";
-        if(level->getAirplanes()[i]->getStatus() == "awaiting_boarding")
+        if(level->getAirplanes()[i]->getStatus() == "awaiting_boarding" || level->getAirplanes()[i]->getStatus() == "requesting_boarding")
             type = "P";
 
         sf::Text* newText = new sf::Text;
@@ -206,9 +222,6 @@ void Game::updateScoreAndFine() {
         newText->setPosition(START_TEXTS_X, START_TEXTS_Y + 300 + 50 * i - 20);
         _t_timeTable_.push_back(newText);
     }
-}
-
-void Game::updateSchedule() {
 
 }
 
@@ -239,15 +252,17 @@ void Game::drawDisplay() {
     getWindow()->draw(__t_getTimeTableTitle__());
 
     //timeTable (first five)
-    if(getLevel()->getAirplanes().size() < 5)
-        for(int i = 0; i < getLevel()->getAirplanes().size(); ++i) {
-            getWindow()->draw(*__s_getTimeTableShape__()[i]);
-            getWindow()->draw(*__t_getTimeTableText__()[i]);
-        }
-    else {
-        for(int i = 0; i < 5; ++i) {
-            getWindow()->draw(*__s_getTimeTableShape__()[i]);
-            getWindow()->draw(*__t_getTimeTableText__()[i]);
+    if(!level->getAirplanes().empty()) {
+        if(getLevel()->getAirplanes().size() < 5)
+            for(int i = 0; i < getLevel()->getAirplanes().size(); ++i) {
+                getWindow()->draw(*__s_getTimeTableShape__()[i]);
+                getWindow()->draw(*__t_getTimeTableText__()[i]);
+            }
+        else {
+            for(int i = 0; i < 5; ++i) {
+                getWindow()->draw(*__s_getTimeTableShape__()[i]);
+                getWindow()->draw(*__t_getTimeTableText__()[i]);
+            }
         }
     }
     //airplaneInfo

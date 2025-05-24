@@ -46,6 +46,7 @@ int main() {
 
         while (game.getWindow()->pollEvent(event)) {
             game.event_handler(&event);
+            game.updateSchedule();
         }
 
         //update game

@@ -131,6 +131,7 @@ void Airplane::DeleteAirplane(Level *level) {
             break;
         }
     }
+
     level->getAirplanes().erase(level->getAirplanes().begin() + airplaneIndex);
     delete this;
 }
