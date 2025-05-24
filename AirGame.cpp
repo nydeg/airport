@@ -7,7 +7,7 @@
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(1024*0.666, 1536*0.666), "Main Menu");
-    window.setFramerateLimit(30);
+    window.setFramerateLimit(10);
 
     Game game;
     Menu menu_game("./assets/ofont.ru_Menlo.ttf", "./assets/menu.png");
@@ -58,6 +58,7 @@ int main() {
         //update Display
 
         game.drawDisplay();
+
 
 
         //game.updateAirplanes();

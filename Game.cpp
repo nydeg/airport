@@ -109,7 +109,7 @@ void Game::updateGame() {
         updateDisplay(); //Curr time += 1
     }
 
-updateAirplanes();
+    updateAirplanes();
 
 /*
     for(int i = 0; i < level->getAirplanes().size(); ++i) {
@@ -403,11 +403,28 @@ void Game::updateAirplanes() {
         airplaneSprites[i].setPosition(airplanes[i]->getX(), airplanes[i]->getY());
     }
 
+    this->checkCollisions(airplaneSprites, airplanes);
+
     for (auto planeSprite : airplaneSprites) {
         win->draw(planeSprite);
     }
 
     //cout << airplanes[0]->getX() << " " << airplanes[0]->getY() << endl;
+}
+
+void Game::checkCollisions(vector<sf::Sprite> airplaneSprites, vector<Airplane*> airplanes) {
+    for (int i = 0; i < airplaneSprites.size() - 1; i++) {
+        for (int j = i; j < airplaneSprites.size(); j++) {
+            if (airplanes[i]->getStatus() == "awaiting_boarding" && airplanes[j]->getStatus() == "awaiting_boarding") {
+                continue;
+            }
+            if (airplaneSprites[i].getGlobalBounds().intersects(airplaneSprites[j].getGlobalBounds())) {
+                cout << airplanes[i]->getStatus() << " " << airplanes[j]->getStatus() << endl;
+                cout << "pizda samoletam" << endl;
+                return;
+            }
+        }
+    }
 }
 
 void Game::drawAirplanes() {
