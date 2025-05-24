@@ -68,8 +68,11 @@ public:
 	sf::RectangleShape __s_getAirplaneInfo__() {return _s_airplaneInfo_; }
 	sf::Text __t_getAirplaneInfo() {return _t_airplaneInfo_; }
 
+	vector<float> getDegrees() { return this->degrees;}
+
 
 private:
+	vector<float> degrees = {0, 90, 180, 270};
 	sf::RenderWindow* window;
 	sf::Texture bg_texture;
 	sf::Sprite background;

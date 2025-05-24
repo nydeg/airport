@@ -1,6 +1,8 @@
 #include "Game.h"
 
 #include "Dispatcher.h"
+
+
 #define DISPLAYS_CHARACTER_SIZE 17
 
 #define START_SHAPES_X 1600
@@ -110,6 +112,7 @@ void Game::updateGame() {
     }
 
     updateAirplanes();
+
 
 /*
     for(int i = 0; i < level->getAirplanes().size(); ++i) {
@@ -394,8 +397,13 @@ void Game::updateAirplanes() {
     for (int i = 0; i < airplaneSprites.size(); i++) {
         indexOfPos = airplanes[i]->getIndex();
         airplanes[i]->work(level, dispatcher, selectedAirstrip, airplanes[i]->getX(), airplanes[i]->getY());
-        if (airplanes[i]->getIndex() != indexOfPos) {
-            airplaneSprites[i].rotate(90.f);
+
+
+        if(airplanes[i]->getStatus() == "boarding_endPoint") {
+            airplaneSprites[i].setRotation(getDegrees()[1]);
+        }
+        else {
+            airplaneSprites[i].setRotation(getDegrees()[indexOfPos]);
         }
     }
 
