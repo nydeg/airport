@@ -159,7 +159,19 @@ void Airplane::BoardingEndPoint(Level *level, Dispatcher *dispatcher, int endX, 
     }
 }
 
-void Airplane::TakeOff(Level *level) {
-    this->setStatus("take_off");
-    this->DeleteAirplane(level);
+void Airplane::TakeOffStartPoint(int startX, int startY) {
+    Moving(startX, startY, "takeoff_endPoint");
+}
+
+void Airplane::TakeOffEndPoint(Level* level, Dispatcher* dispatcher, int endX, int endY) {
+    if (this->getX() != endX && this->getY() != endY) {
+        Moving(endX, endY, "takeoff");
+    }
+    else {
+
+        // delete plane
+        this->DeleteAirplane(level);
+        // increase user score
+        dispatcher->setCurrentScore(dispatcher->getCurrentScore() + 1);
+    }
 }

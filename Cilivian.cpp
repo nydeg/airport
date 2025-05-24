@@ -35,7 +35,10 @@ void Civilian::work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, in
 	else if (this->getStatus() == "boarding_endPoint") {
 		this->BoardingEndPoint(level, dispatcher, airstrip->getEnd().first, airstrip->getEnd().second);
 	}
-	else if (this->getStatus() == "take_off") {
-		this->TakeOff(level);
+	else if (this->getStatus() == "takeoff_startPoint") {
+		this->TakeOffStartPoint(airstrip->getEnd().first, airstrip->getEnd().second);
+	}
+	else if (this->getStatus() == "takeoff_endPoint") {
+		this->TakeOffEndPoint(level, dispatcher, airstrip->getStart().first, airstrip->getStart().second);
 	}
 }

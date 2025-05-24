@@ -30,7 +30,8 @@ public:
 	void MovingNewLap(int x, int y);
 	void BoardingStartPoint(int startX, int startY);
 	void BoardingEndPoint(Level *level, Dispatcher *dispatcher, int endX, int endY);
-	void TakeOff(Level *level);
+	void TakeOffStartPoint(int startX, int startY);
+	void TakeOffEndPoint(Level* level, Dispatcher* dispatcher, int endX, int endY);
 
 	void DeleteAirplane(Level *level);
 	void MoveInLap(Level *level);
