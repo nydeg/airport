@@ -43,8 +43,8 @@ int main() {
         game.getWindow()->clear();
         game.getWindow()->draw(game.getBackground());
 
-        //if(i % 29 == 0) {
-        if(i%1 == 0){
+        if(i % 29 == 0) {
+        //if(i%1 == 0){
             game.updateGame();
             i = 0;
         }
@@ -58,6 +58,13 @@ int main() {
 
         game.drawDisplay();
 
+        /*
+        //Airplanes drawing
+        for(int j = 0; j < game.getLevel()->getAirplanes().size(); ++j) {
+            game.getLevel()->getAirplanes()[i]->updatePos();
+            game.getWindow()->draw(game.getLevel()->getAirplanes()[i]->__s_getTestShape__());
+        }
+        */
 
         game.getWindow()->display();
     }

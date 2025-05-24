@@ -27,10 +27,6 @@ Airplane::Airplane()
 
 	cout << "airplane was created\n";
 
-    test.setSize(sf::Vector2f(10,10));
-    test.setFillColor(sf::Color::Red);
-    test.setPosition(x,y);
-
 }
 
 
@@ -182,4 +178,9 @@ void Airplane::TakeOffEndPoint(Level* level, Dispatcher* dispatcher, int endX, i
         // increase user score
         dispatcher->setCurrentScore(dispatcher->getCurrentScore() + 1);
     }
+}
+
+void Airplane::TakeOff(Level* level) {
+    this->setStatus("take_off");
+    this->DeleteAirplane(level);
 }

@@ -7,6 +7,7 @@
 #include "Level.h"
 #include <vector>
 #include "Lap.h"
+#include "SFML/Graphics.hpp"
 
 using std::cout;
 using std::string;
@@ -24,6 +25,8 @@ public:
 	~Airplane(){cout << "airplane was deleted\n";}
 
 	virtual void work(Level *level, Dispatcher *dispatcher, Airstrip *airstrip, int x, int y) = 0;
+
+	void TakeOff(Level* level);
 
 	// functions for work
 	void Moving(int x, int y, string new_status);
@@ -58,7 +61,6 @@ public:
 	int getY() { return this->y; }
 	int getCornenrInd() { return ind; }
 
-	sf::RectangleShape __s_getTestShape__() {return test; }
 
 
 	//setters
@@ -70,6 +72,7 @@ public:
 	void setMaxLaps(int num) { maxLaps = num; }
 	void setLengthOfAirstrip(int len) { lengthOfAirstrip = len; }
 	void setOneLipInMinute(int value) { oneLipInMinute = value; }
+
 
 
 private:
@@ -96,7 +99,6 @@ private:
 	int lengthOfAirstrip;
 	int oneLipInMinute;
 
-	sf::RectangleShape test;
 
 
 };
