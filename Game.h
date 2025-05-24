@@ -25,6 +25,7 @@ public:
 	void updateScoreAndFine();
 	void updateSchedule();
 	void updateDisplay();
+	void event_handler(sf::Event* event);
 
 	void drawDisplay();
 	void drawAirplaneInfo();
@@ -33,7 +34,7 @@ public:
 	void setLevel(Level* new_level) { level = new_level; }
 	void setBackground(string url_bg);
 
-	void event_handler(sf::Event* event);
+	//void event_handler(sf::Event* event);
 	//setters
 
 	void setDispatcher(Dispatcher* tmp){dispatcher = tmp;}
@@ -90,7 +91,9 @@ private:
 
 	//buttons
 	sf::RectangleShape _s_approveButton;
+	sf::Texture _s_texture_approve;
 	sf::RectangleShape _s_dismissButton;
+	sf::Texture _s_texture_dismiss;
 
 	//Airplane info
 	sf::RectangleShape _s_airplaneInfo_;

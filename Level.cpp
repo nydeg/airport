@@ -13,6 +13,7 @@
 Level::Level(int levelNumber)
 {
 	string line;
+	this->level_num = levelNumber;
 
 	std::ifstream in("levels/" + to_string(levelNumber) + ".txt");
 	if (in.is_open())
@@ -133,10 +134,10 @@ Level::Level(int levelNumber)
 Level::Level() {};
 
 void Level::initLapCoordinates() {
-	this->lapCoordinates.push_back({10, 10, "upper-right"});
-	this->lapCoordinates.push_back({0, 10, "upper-left"});
-	this->lapCoordinates.push_back({0, 0, "lower-left"});
-	this->lapCoordinates.push_back({10, 0, "lower-right"});
+	this->lapCoordinates.push_back({1580, 30, "upper-right"});
+	this->lapCoordinates.push_back({30, 30, "upper-left"});
+	this->lapCoordinates.push_back({30, 970, "lower-left"});
+	this->lapCoordinates.push_back({1580, 970, "lower-right"});
 }
 
 

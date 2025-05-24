@@ -21,10 +21,9 @@ int main() {
         window.clear();
         window.draw(menu_game.getBackground());
         window.draw(menu_game.getTitle());
-        window.draw(menu_game.getInputBox());
+        window.draw(*menu_game.getInputBox());
         window.draw(menu_game.getinputText());
         window.draw(menu_game.getButton());
-        window.draw(menu_game.getButtonText());
         window.display();
     }
 
@@ -32,7 +31,7 @@ int main() {
 
     // MAIN GAME
     sf::RenderWindow newWindow(sf::VideoMode(1900, 1000), "Game Window");
-    game.setBackground("./assets/level 1.png");
+    game.setBackground("./assets/level " + to_string(game.getLevel()->getLevelNum()) + ".png");
     game.setWindow(&newWindow);
 
 
@@ -55,6 +54,7 @@ int main() {
         }
 
         //update Display
+        game.updateDisplay();
         game.drawDisplay();
 
 
