@@ -17,7 +17,7 @@ public:
 
 	Military() { cout << "Military was created\n"; }
 
-	Military(int boardNumber, string stata, Date date, int maxLaps);
+	Military(int boardNumber, string stata, Date date, int maxLaps, Level* level);
 
 	~Military() { cout << "Military was deleted\n"; }
 

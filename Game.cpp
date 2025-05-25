@@ -70,9 +70,10 @@ void Game::event_handler(sf::Event* event) {
                 else if (level->getAirplanes().front()->getStatus() == "requesting_takeoff") {
                     level->getAirplanes().front()->setStatus("take_off");
                     selectedAirstrip = level->getAirstrips()[i];
+                    level->getAirplanes()[i]->setBoardIndex(i);
 
-                    //level->getAirplanes().front()->setX(selectedAirstrip->getEnd().first);
-                    //level->getAirplanes().front()->setY(selectedAirstrip->getEnd().second);
+                    level->getAirplanes().front()->setX(selectedAirstrip->getEnd().first);
+                    level->getAirplanes().front()->setY(selectedAirstrip->getEnd().second);
 
                     dispatcher->setCurrentScore(dispatcher->getCurrentScore() + 1);
                     updateScoreAndFine();
@@ -405,8 +406,11 @@ void Game::updateAirplanes() {
         airplanes[i]->work(level, dispatcher, selectedAirstrip, airplanes[i]->getX(), airplanes[i]->getY());
 
 
-        if(airplanes[i]->getStatus() == "take_off" || airplanes[i]->getStatus() == "awaiting_takeoff")
-            airplaneSprites[i].setRotation(getDegrees()[3]);
+        if(airplanes[i]->getStatus() == "take_off" || airplanes[i]->getStatus() == "awaiting_takeoff") {
+            airplanes[i]->setIndex(3);
+            airplaneSprites[i].setRotation(getDegrees()[airplanes[i]->getIndex()]);
+            //cout << airplanes[i]->getBoardNumber() << " " << airplanes[i]->getIndex() <<" "  << "ROTATE\n";
+        }
         if(airplanes[i]->getStatus() == "boarding_endPoint") {
             airplaneSprites[i].setRotation(getDegrees()[1]);
         }
@@ -415,14 +419,21 @@ void Game::updateAirplanes() {
         }
     }
 
+    vector<bool> flags(airplanes.size(), true);
+
     for (int i = 0; i < airplaneSprites.size(); i++) {
+        if (airplanes[i]->getStatus() == "awaiting_takeoff") {
+            flags[i] = false;
+        }
         airplaneSprites[i].setPosition(airplanes[i]->getX(), airplanes[i]->getY());
     }
 
     //this->checkCollisions(airplaneSprites, airplanes);
 
-    for (auto planeSprite : airplaneSprites) {
-        win->draw(planeSprite);
+    for (int i = 0; i < airplaneSprites.size(); i++) {
+        if (flags[i]) {
+            win->draw(airplaneSprites[i]);
+        }
     }
 
     //cout << airplanes[0]->getX() << " " << airplanes[0]->getY() << endl;

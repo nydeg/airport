@@ -229,7 +229,7 @@ void Airplane::TakeOffStartPoint(int startX, int startY) {
 }
 
 void Airplane::TakeOffEndPoint(Level* level, Dispatcher* dispatcher, int endX, int endY) {
-    if (this->getX() != endX && this->getY() != endY) {
+    if (this->getX() != endX || this->getY() != endY) {
         Moving(endX, endY, "takeoff");
     }
     else {

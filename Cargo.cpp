@@ -3,20 +3,29 @@
 #include "Dispatcher.h"
 #include "Airstrip.h"
 
-Cargo::Cargo(int boardNumber, string stata, Date date, int maxLaps)
+Cargo::Cargo(int boardNumber, string stata, Date date, int maxLaps, Level* level)
 {
+	vector<int> boardNumbers = level->getAllBoardNumbers();
+	int indexBoard = 0;
+	for (int i = 0; i < boardNumbers.size(); i++) {
+		if (boardNumbers[i] == boardNumber) {
+			indexBoard = i;
+			break;
+		}
+	}
+
 	//unique data
 	setBoardNumber(boardNumber);
 	if (stata == "V") {
 		setStatus("awaiting_takeoff");
-		if(boardNumber/100 != 1) {
-			setX(1200);
-			setY(350);
+		if (level->getAirstrips().size() > indexBoard) {
+			setX(level->getAirstrips()[indexBoard]->getEnd().first);
+			setY(level->getAirstrips()[indexBoard]->getEnd().second);
+		} else {
+			setX(level->getAirstrips()[0]->getEnd().first);
+			setY(level->getAirstrips()[0]->getEnd().second);
 		}
-		else {
-			setX(1300);
-			setY(260);
-		}
+
 	}
 	else {
 		setStatus("awaiting_boarding");

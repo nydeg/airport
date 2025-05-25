@@ -11,7 +11,7 @@ class Cargo : public Airplane {
 public:
 	Cargo() { cout << "Cargo was created\n"; }
 
-	Cargo(int boardNumber, string stata, Date date, int maxLaps);
+	Cargo(int boardNumber, string stata, Date date, int maxLaps, Level* level);
 
 	~Cargo() { cout << "Cargo was deleted\n"; }
 

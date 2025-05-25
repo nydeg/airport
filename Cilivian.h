@@ -11,7 +11,7 @@ class Civilian : public Airplane {
 public:
 	Civilian() { cout << "Civilian was created\n"; }
 
-	Civilian(int boardNumber, string stata, Date date, int maxLaps);
+	Civilian(int boardNumber, string stata, Date date, int maxLaps, Level* level);
 
 	~Civilian() { cout << "Civilian was deleted\n"; }
 

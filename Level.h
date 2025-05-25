@@ -43,6 +43,8 @@ public:
 	int getIndexOfLastDeletedPlane() { return this->indexOfLastDeletedPlane; }
 	void setIndexOfLastDeletedPlane(int idx) { this->indexOfLastDeletedPlane = idx; }
 
+	vector<int> getAllBoardNumbers() { return allBoardNumbers; }
+
 private:
 	int fine;
 	int level_num;
@@ -59,6 +61,7 @@ private:
 	pair<int, int> roadHangarForBoardingCoordinates;
 
 	int indexOfLastDeletedPlane;
+	vector<int> allBoardNumbers;
 
 
 

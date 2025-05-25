@@ -80,6 +80,8 @@ public:
 	void setType(string type) { this->type = type; }
 	void setX(int x) { this->x = x; }
 	void setY(int y) { this->y = y; }
+	void setBoardIndex(int index) { this->boardIndex = index; }
+	void setIndex(int tmp){ind = tmp;}
 
 
 private:
@@ -110,6 +112,8 @@ private:
 
 	sf::RectangleShape test;
 
+protected:
+	int boardIndex;
 
 };
 
