@@ -430,10 +430,11 @@ void Game::updateAirplanes() {
 
     //this->checkCollisions(airplaneSprites, airplanes);
 
+
     for (int i = 0; i < airplaneSprites.size(); i++) {
-        if (flags[i]) {
+        //if (flags[i]) {
             win->draw(airplaneSprites[i]);
-        }
+        //}
     }
 
     //cout << airplanes[0]->getX() << " " << airplanes[0]->getY() << endl;
