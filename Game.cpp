@@ -405,8 +405,11 @@ void Game::updateAirplanes() {
         airplanes[i]->work(level, dispatcher, selectedAirstrip, airplanes[i]->getX(), airplanes[i]->getY());
 
 
-        if(airplanes[i]->getStatus() == "take_off" || airplanes[i]->getStatus() == "awaiting_takeoff")
-            airplaneSprites[i].setRotation(getDegrees()[3]);
+        if(airplanes[i]->getStatus() == "take_off" || airplanes[i]->getStatus() == "awaiting_takeoff") {
+            airplanes[i]->setIndex(3);
+            airplaneSprites[i].setRotation(getDegrees()[airplanes[i]->getIndex()]);
+            //cout << airplanes[i]->getBoardNumber() << " " << airplanes[i]->getIndex() <<" "  << "ROTATE\n";
+        }
         if(airplanes[i]->getStatus() == "boarding_endPoint") {
             airplaneSprites[i].setRotation(getDegrees()[1]);
         }
